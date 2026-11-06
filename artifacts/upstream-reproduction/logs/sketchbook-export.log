@@ -1,0 +1,12 @@
+index.html: 1080x1920, 144 frames @ 24fps (6.0000s)
+  24/144 frames  49ms/frame
+  48/144 frames  48ms/frame
+  72/144 frames  47ms/frame
+  96/144 frames  45ms/frame
+  120/144 frames  44ms/frame
+  144/144 frames  45ms/frame
+frames 0..143 written in 6.5s
+audio.wav written (1.15 MB) in 0.7s
+stems written: stem-music.wav, stem-sfx.wav in 1.9s
+wrote E:\codex\small_tasks\changrenyan-video\third_party\animate\plugins\animate\skills\animate\styles\sketchbook\demo\renders\final.mp4
+wrote E:\codex\small_tasks\changrenyan-video\third_party\animate\plugins\animate\skills\animate\styles\sketchbook\demo\renders\share.mp4

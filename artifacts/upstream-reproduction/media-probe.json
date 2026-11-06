@@ -1,0 +1,58 @@
+{
+  "sketchbook": {
+    "programs": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "r_frame_rate": "24/1",
+        "nb_frames": "144"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_frames": "283"
+      }
+    ],
+    "format": {
+      "duration": "6.016000",
+      "size": "1901357",
+      "bit_rate": "2528400"
+    }
+  },
+  "crosshatch": {
+    "programs": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1920,
+        "r_frame_rate": "24/1",
+        "nb_frames": "144"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "nb_frames": "283"
+      }
+    ],
+    "format": {
+      "duration": "6.016000",
+      "size": "3070751",
+      "bit_rate": "4083445"
+    }
+  }
+}
