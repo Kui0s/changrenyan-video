@@ -1,10 +1,10 @@
-# Codex 正式任务｜EP01 工程阶段0–2（阶段0已复现，原创样片待放行）
+# Codex 正式任务｜EP01 工程阶段0–2（阶段0已复现；原创15秒样片已授权执行）
 
-> 当前状态：上游阶段0的 Sketchbook/Crosshatch 官方 Demo 已在工作分支复现（PR #3）；**用户已选择 Sketchbook**；原创样片和正式全片尚未制作。独立导演审核待完成。现以 `episodes/EP01/ORIGINAL_SAMPLE_TASK.md` 及 Issue #4 作为下一执行任务。
+> 当前状态：上游阶段0的 Sketchbook/Crosshatch 官方 Demo 已在工作分支复现（PR #3）；**用户已选择 Sketchbook**；原创样片和正式全片尚未制作。**导演文字稿 ROUND 03 已正式90.0/100 PASS；用户授权直接启动原创15秒样片**，不必再等待旧审核。现以 `episodes/EP01/ORIGINAL_SAMPLE_TASK.md` 及 Issue #4 作为下一执行任务。
 
 ## 不可省略的阅读
 
-先阅读 `AGENTS.md`、`docs/WORKFLOW.md`、`docs/VOICE_AND_DURATION_POLICY.md`、`docs/STYLE_BASELINE.md`、`docs/UPSTREAM_SOURCES.md`、`docs/MOTION_REQUIREMENTS.md`、`docs/SCORE_RUBRIC.md`、`episodes/EP01/RESEARCH.md`、`episodes/EP01/SCRIPT.md`、`episodes/EP01/DIRECTOR.md`、`episodes/EP01/SAMPLE_15S.md`。
+先阅读仓库根 `CODEX_START_HERE.md`、`AGENTS.md`、`docs/WORKFLOW.md`、`docs/VOICE_AND_DURATION_POLICY.md`、`docs/STYLE_BASELINE.md`、`docs/UPSTREAM_SOURCES.md`、`docs/MOTION_REQUIREMENTS.md`、`docs/SCORE_RUBRIC.md`、`episodes/EP01/RESEARCH.md`、`episodes/EP01/SCRIPT.md`、`episodes/EP01/DIRECTOR.md`、`episodes/EP01/SAMPLE_15S.md`。
 
 ## 阶段0：真实克隆并复现 GitHub 原仓库（可在导演稿审核时并行）
 
@@ -22,7 +22,7 @@ git clone https://github.com/cth9191/animate.git .\third_party\animate
 git -C .\third_party\animate rev-parse HEAD
 ```
 
-## 阶段1：风格已确定，导演稿审核通过后建立真实原创动画工程
+## 阶段1：风格已确定、导演稿90分已通过，现在建立真实原创动画工程
 
 1. 复用已经验证的 `kit.js` 与公共引擎，新增人物步态、髋膝踝关节或等效稳定姿态系统、血液/间隙/肌肉结构和摄取粒子轨迹。
 2. 将摄影机当成有轨迹的实体：位置、跟随对象、缩放与世界空间变换随时间连续变化；不能把图片整体放大冒充镜头进入腿部。
@@ -42,10 +42,10 @@ git -C .\third_party\animate rev-parse HEAD
 
 完整成片≤120秒；旧68秒只是示意时间轴。15秒原创技术样片维持单独约15秒规格以验证动作，未选定的正式配音不构成此阶段证据缺失。配音/字幕 A 维在完整成片阶段必须实测并按固定评分权重审核；见 `docs/VOICE_AND_DURATION_POLICY.md`。
 
-## 明确的阶段门禁
+## 明确的阶段门禁（当前：15秒可制作，完整视频仍未放行）
 
 - 原版风格复现通过≠新片通过；关键帧好看≠有动画；MP4有效≠叙事有效。
-- 未经独立GPT审核导演稿，不能宣称批准制作正式样片。
+- **导演稿独立审核已完成**：`reviews/ROUND_03.md` 为90.0分PASS；用户已批准Codex按仓库任务开始原创15秒样片。不要再次等待这一已经满足的关口。
 - 独立GPT/独立Codex审核须评价真实产物，评分制度 `docs/SCORE_RUBRIC.md` 固定，样片阶段按已定义的适用维度权重归一化≥90、单项≥3.5及硬否决全部通过后，才**建议**用户决定是否扩展全片。缺少必验视频或工程证据是 NOT VERIFIED，不可算不适用。
 - 两轮返工仍无有效改善时停止盲目反复，登记阻塞与替代方案。
 
@@ -62,3 +62,4 @@ git -C .\third_party\animate rev-parse HEAD
 ```
 
 任何尚未完成的阶段必须明确 `NOT VERIFIED`，不得仅凭规划文本声称已运行。
+> 最新工程授权只限 `Issue #4` 的15秒原创样片和 `Issue #5` 的03/06并行预演；参考 `episodes/EP01/QA_HANDOFF.md` 交付后进行独立90分审核，**严禁自动进入完整成片阶段**。
