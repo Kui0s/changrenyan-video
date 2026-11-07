@@ -147,7 +147,7 @@ function drawMicro(t, transition) {
   drawBoundaryLabel('毛细血管壁', 265, 1325, 'label-wall', labelsIn);
   drawBoundaryLabel('组织间隙', 555, 1325, 'label-space', labelsIn);
   drawBoundaryLabel('肌细胞膜', 850, 1325, 'label-membrane', labelsIn);
-  handLetter('葡萄糖转运', 708, 824, 42, { col: SK.graph, align: 'center', reveal: ease01((t - 10.7) / 0.7), key: 'label-gate', jit: 0.5 });
+  handLetter('葡萄糖转运', 708, 824, 42, { col: SK.graph, align: 'center', reveal: ease01((t - 11.55) / 0.45), key: 'label-gate', jit: 0.5 });
 
   // The tracked glucose particle leaves a persistent graphite route behind it.
   const route = MM.glucoseStops.map((stop) => [stop.x, lerp(860, 895, ease01((stop.x - 430) / 250))]);
