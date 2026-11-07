@@ -1,6 +1,6 @@
 # 常人言｜代码动画短视频系列
 
-> 项目状态：**已完成两套官方 Demo 源码复现（PR #3，仅在工程分支）；EP01 原创样片和完整成片尚未制作，导演稿独立审核待完成；用户已选定 Sketchbook 唯一系列画风。**
+> 项目状态：**Sketchbook 已确认、上游官方 Demo 复现通过；EP01 第一轮独立导演审核未过（ROUND 01：REVISE/NO_GO，诊断约79.3分且缺普通话实测证据）；已完成创作端返工稿 v1.4/v2.3，待正式 ROUND 02 复核。原创样片与全片尚未制作。**
 >
 > 当前基线：`SCORE_RUBRIC v1.0`（固定计分标准），`AUDIT_CHECKLIST v1.0`（可逐轮细化的检查项）。
 
@@ -42,16 +42,19 @@
 - `episodes/EP01/CODEX_TASK.md`：交给 Codex 的可执行工程任务。
 - `episodes/EP01/reviews/ROUND_00.md`：早期初始状态卡（历史存档）。
 - `episodes/EP01/reviews/UPSTREAM_PROVENANCE_AUDIT.md`：上游复现与原创能力来源审计。
-- `episodes/EP01/reviews/CREATOR_PRE_REVIEW_R01.md`：内容端定向修订记录；**不是独立审核通过**。
+- `episodes/EP01/reviews/CREATOR_PRE_REVIEW_R01.md`：内容端初期修订记录；**不是独立审核通过**。
+- `episodes/EP01/reviews/ROUND_01.md`：首轮独立导演审核，**REVISE/NO_GO**（诊断79.3；配音证据不足）。
+- `episodes/EP01/reviews/CREATOR_REVISION_R02.md`：针对ROUND 01的逐项整改记录；**不是独立审核**。
+- `episodes/EP01/VOICE_TIMING_PROBE_R02.md`：低保真临时声音计时及限制；**仍需普通话实测证据**。
 - `AGENTS.md`：Codex 工作权限与禁止事项。
 
 ## 当前事实状态
 
 - [x] 研究来源初步核查并整理（仍需独立内容审核）
-- [x] EP01 旁白 v1.3 与导演稿 v2.2 内容端修订草案（**独立审核 NOT VERIFIED**）
+- [x] EP01 旁白 v1.4 与导演稿 v2.3 定向修订草案（**ROUND 01 旧稿未通过，新稿待独立ROUND 02**）
 - [x] 固定评分尺度与动态性审核规则
 - [x] 创建独立 GitHub 远程仓库并上传首批项目文件
-- [ ] 独立审核导演稿
+- [ ] 独立导演审核正式≥90分放行（[ROUND 01 NO_GO](https://github.com/Kui0s/changrenyan-video/blob/main/episodes/EP01/reviews/ROUND_01.md)，[Issue #1](https://github.com/Kui0s/changrenyan-video/issues/1) 已明确固定90分关口）
 - [x] Codex 在工程分支重建上游官方 Demo（[PR #3](https://github.com/Kui0s/changrenyan-video/pull/3)，来源审计 PASS；不是原创样片）
 - [x] 用户确认 Sketchbook 为唯一系列手绘画风（源码上游 commit 已记录；**原创派生工程基线尚待验证**）
 - [ ] [#4](https://github.com/Kui0s/changrenyan-video/issues/4) 15秒**原创**代码动画样片（非上游 Demo）
