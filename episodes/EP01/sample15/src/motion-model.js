@@ -8,18 +8,21 @@
     return x * x * (3 - 2 * x);
   };
 
-  function legState(phase, side) {
-    const offset = side === 'left' ? 0 : Math.PI;
-    const a = phase * Math.PI * 2 + offset;
-    const stride = Math.sin(a);
-    const lift = Math.max(0, -Math.cos(a));
+  const phase01 = (value) => ((value % 1) + 1) % 1;
+
+  function legState(phase, side, groundFromHip) {
+    const p = phase01(phase + (side === 'right' ? 0.5 : 0));
+    const planted = p < 0.5;
+    const u = planted ? p / 0.5 : (p - 0.5) / 0.5;
+    const lift = planted ? 0 : Math.sin(Math.PI * u) * 72;
     const hip = [0, 0];
-    const lane = side === 'left' ? -12 : 12;
-    const knee = [lane + stride * 42, 118 - lift * 38];
-    const ankle = [lane + stride * 72, 248 - lift * 66];
-    const toe = [ankle[0] + 46 + 12 * Math.sin(a + 0.6), ankle[1] + 5 - lift * 10];
+    const lane = side === 'left' ? -8 : 8;
+    const toeX = planted ? 45 - 90 * u : mix(-45, 45, smooth(u));
+    const toe = [lane + toeX, groundFromHip - lift];
+    const ankle = [toe[0] - 44, toe[1] - 6 - (planted ? 0 : Math.sin(Math.PI * u) * 8)];
+    const knee = [lane + ankle[0] * 0.48 + 24, ankle[1] * 0.52 - lift * 0.08];
     return {
-      planted: Math.cos(a) >= -0.001,
+      planted,
       hip,
       knee,
       ankle,
@@ -29,15 +32,43 @@
   }
 
   function gaitState(progress) {
-    const phase = ((progress % 1) + 1) % 1;
+    const phase = phase01(progress);
+    const groundY = 1060;
+    const hipY = 805 + 10 * Math.cos(phase * Math.PI * 4);
     return {
       phase,
-      hipY: 780 + 10 * Math.cos(phase * Math.PI * 6),
+      groundY,
+      hipY,
       torsoLean: -0.04 + 0.025 * Math.sin(phase * Math.PI * 2),
-      left: legState(phase, 'left'),
-      right: legState(phase, 'right'),
+      left: legState(phase, 'left', groundY - hipY),
+      right: legState(phase, 'right', groundY - hipY),
       armSwing: Math.sin(phase * Math.PI * 2),
     };
+  }
+
+  function walkerState(time) {
+    const gait = gaitState(time * 0.75);
+    const worldX = 170 + time * 135;
+    const absoluteLeg = (leg, hipX) => ({
+      ...leg,
+      hip: [hipX, gait.hipY],
+      knee: [hipX + leg.knee[0], gait.hipY + leg.knee[1]],
+      ankle: [hipX + leg.ankle[0], gait.hipY + leg.ankle[1]],
+      toe: [hipX + leg.toe[0], gait.hipY + leg.toe[1]],
+    });
+    return {
+      ...gait,
+      worldX,
+      left: absoluteLeg(gait.left, worldX - 28),
+      right: absoluteLeg(gait.right, worldX + 28),
+    };
+  }
+
+  function calfAnchor(walker) {
+    return [
+      (walker.right.knee[0] + walker.right.ankle[0]) / 2,
+      (walker.right.knee[1] + walker.right.ankle[1]) / 2,
+    ];
   }
 
   function cameraState(time, target = [690, 1110]) {
@@ -50,13 +81,21 @@
     };
   }
 
-  function transitionState(time) {
+  function worldToSampleScreen(point, camera) {
+    return [
+      540 + (point[0] - camera.focus[0]) * camera.zoom,
+      1030 + (point[1] - camera.focus[1]) * camera.zoom,
+    ];
+  }
+
+  function transitionState(time, anchor = [690, 1090]) {
     const macroAlpha = 1 - smooth((time - 5.25) / 1.15);
     const microAlpha = smooth((time - 5.25) / 1.35);
     return {
       macroAlpha,
       microAlpha,
       microScale: mix(0.12, 1, microAlpha),
+      microOrigin: [mix(anchor[0], 540, microAlpha), mix(anchor[1], 930, microAlpha)],
     };
   }
 
@@ -105,7 +144,10 @@
 
   const api = {
     gaitState,
+    walkerState,
     cameraState,
+    calfAnchor,
+    worldToSampleScreen,
     transitionState,
     muscleState,
     glucoseState,
