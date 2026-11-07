@@ -32,7 +32,7 @@
 - `docs/SCORE_RUBRIC.md`：固定的100分评分维度、权重、门槛与硬性否决。
 - `docs/AUDIT_CHECKLIST.md`：会随实物缺陷增加的检查项；不得改变评分尺度。
 - `docs/MOTION_REQUIREMENTS.md`：避免“幻灯片视频”的工程约束及可执行测试。
-- `docs/STYLE_BASELINE.md`：实际源码风格基线，等待 Demo 复现与用户选定。
+- `docs/STYLE_BASELINE.md`：上游 Demo 已复现，包含 Sketchbook 推荐及尚待用户确定的唯一正式风格。
 - `docs/UPSTREAM_SOURCES.md`：GitHub 源码来源、路径、可复现要求及许可证。
 - `episodes/EP01/RESEARCH.md`：科学证据与禁用论点。
 - `episodes/EP01/SCRIPT.md`：口播文案。
