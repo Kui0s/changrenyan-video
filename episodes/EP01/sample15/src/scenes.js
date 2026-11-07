@@ -14,29 +14,22 @@ function drawLimb(P, key, width = 16, col = SK.ink, opacity = 1) {
   });
 }
 
-function drawWalker(t) {
-  const progress = t * 0.75;
-  const s = MM.gaitState(progress);
-  const worldX = 170 + Math.min(t, 4.9) * 135;
+function drawWalker(t, s, target, cam) {
+  const worldX = s.worldX;
   const hipY = s.hipY;
-  const rightHip = [worldX + 28, hipY];
-  const leftHip = [worldX - 28, hipY];
-  const point = (p, hip) => [hip[0] + p[0], hip[1] + p[1]];
-  const right = [rightHip, point(s.right.knee, rightHip), point(s.right.ankle, rightHip), point(s.right.toe, rightHip)];
-  const left = [leftHip, point(s.left.knee, leftHip), point(s.left.ankle, leftHip), point(s.left.toe, leftHip)];
-  const target = [(right[1][0] + right[2][0]) / 2, (right[1][1] + right[2][1]) / 2];
-  const cam = MM.cameraState(t, target);
+  const right = [s.right.hip, s.right.knee, s.right.ankle, s.right.toe];
+  const left = [s.left.hip, s.left.knee, s.left.ankle, s.left.toe];
 
   ctx.save();
   ctx.translate(540, 1030);
   ctx.scale(cam.zoom, cam.zoom);
   ctx.translate(-cam.focus[0], -cam.focus[1]);
 
-  const groundY = 1288;
-  gpencil([[50, groundY], [350, groundY - 4], [700, groundY + 5], [1030, groundY]], { key: 'walk-ground', w: 3.2, a: 0.58 });
-  for (let i = 0; i < 7; i++) {
-    const fx = 120 + i * 132;
-    gpencil([[fx, groundY - 3], [fx + 48, groundY + 3]], { key: 'footmark' + i, w: 5, a: 0.2 + 0.3 * clamp((t * 170 - fx + 300) / 180), passes: 1 });
+  const groundY = s.groundY;
+  gpencil([[-500, groundY], [300, groundY - 4], [1100, groundY + 5], [1900, groundY]], { key: 'walk-ground', w: 3.2, a: 0.58 });
+  for (let i = 0; i < 12; i++) {
+    const fx = 80 + i * 155;
+    gpencil([[fx, groundY - 3], [fx + 48, groundY + 3]], { key: 'footmark' + i, w: 5, a: 0.2 + 0.3 * clamp((worldX - fx + 200) / 180), passes: 1 });
   }
 
   drawLimb(left, 'left-leg', 13, SK.graph, 0.72);
@@ -94,7 +87,7 @@ function drawMicro(t, transition) {
   ctx.save();
   if (transition.microScale < 1) {
     const scale = transition.microScale;
-    const ox = lerp(690, 540, transition.microAlpha), oy = lerp(1090, 930, transition.microAlpha);
+    const [ox, oy] = transition.microOrigin;
     ctx.translate(ox, oy);
     ctx.scale(scale, scale);
     ctx.translate(-540, -930);
@@ -175,8 +168,12 @@ function drawMicro(t, transition) {
 
 function sceneSample() {
   sketchPage({ grid: 'dots' });
-  const transition = MM.transitionState(TT);
-  if (transition.macroAlpha > 0.001) drawOnSampleLayer('macro', transition.macroAlpha, () => drawWalker(TT));
+  const walker = MM.walkerState(TT);
+  const target = MM.calfAnchor(walker);
+  const camera = MM.cameraState(TT, target);
+  const screenAnchor = MM.worldToSampleScreen(target, camera);
+  const transition = MM.transitionState(TT, screenAnchor);
+  if (transition.macroAlpha > 0.001) drawOnSampleLayer('macro', transition.macroAlpha, () => drawWalker(TT, walker, target, camera));
   if (transition.microAlpha > 0.001) drawOnSampleLayer('micro', transition.microAlpha, () => drawMicro(TT, transition));
 
   if (TT < 4.2) {

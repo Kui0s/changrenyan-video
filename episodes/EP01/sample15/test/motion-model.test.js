@@ -3,7 +3,10 @@ const assert = require('node:assert/strict');
 
 const {
   gaitState,
+  walkerState,
   cameraState,
+  calfAnchor,
+  worldToSampleScreen,
   glucoseState,
   transitionState,
   muscleState,
@@ -21,6 +24,22 @@ test('gait alternates planted feet while keeping joint motion continuous', () =>
     assert.ok(Math.abs(samples[i].left.knee[0] - samples[i - 1].left.knee[0]) <= 90);
     assert.ok(Math.abs(samples[i].right.ankle[1] - samples[i - 1].right.ankle[1]) <= 75);
   }
+});
+
+test('support foot stays on the ground without sliding during each stance', () => {
+  const leftStance = [0.1, 0.3, 0.5].map((t) => walkerState(t));
+  const rightStance = [0.8, 1.0, 1.2].map((t) => walkerState(t));
+
+  for (const state of leftStance) {
+    assert.equal(state.left.planted, true);
+    assert.ok(Math.abs(state.left.toe[1] - state.groundY) < 0.001);
+  }
+  for (const state of rightStance) {
+    assert.equal(state.right.planted, true);
+    assert.ok(Math.abs(state.right.toe[1] - state.groundY) < 0.001);
+  }
+  assert.ok(Math.max(...leftStance.map((s) => s.left.toe[0])) - Math.min(...leftStance.map((s) => s.left.toe[0])) < 0.001);
+  assert.ok(Math.max(...rightStance.map((s) => s.right.toe[0])) - Math.min(...rightStance.map((s) => s.right.toe[0])) < 0.001);
 });
 
 test('camera follows the supplied right-leg joint target before entering the tissue view', () => {
@@ -59,16 +78,23 @@ test('glucose crosses capillary wall, interstitial space, and muscle membrane in
 });
 
 test('transition fades the walker before the microscopic diagram fills the page', () => {
-  const start = transitionState(5.2);
-  const middle = transitionState(6.1);
-  const end = transitionState(6.8);
+  const walker = walkerState(5.25);
+  const worldAnchor = calfAnchor(walker);
+  const screenAnchor = worldToSampleScreen(worldAnchor, cameraState(5.25, worldAnchor));
+  const start = transitionState(5.25, screenAnchor);
+  const middle = transitionState(6.1, screenAnchor);
+  const end = transitionState(6.8, screenAnchor);
 
   assert.ok(start.macroAlpha > 0.9);
   assert.ok(start.microAlpha < 0.1);
+  assert.deepEqual(start.microOrigin, screenAnchor);
   assert.ok(middle.macroAlpha < 0.55);
   assert.ok(middle.microAlpha > 0.45);
+  assert.ok(middle.microOrigin[0] >= Math.min(540, screenAnchor[0]));
+  assert.ok(middle.microOrigin[0] <= Math.max(540, screenAnchor[0]));
   assert.equal(end.macroAlpha, 0);
   assert.equal(end.microAlpha, 1);
+  assert.deepEqual(end.microOrigin, [540, 930]);
   assert.ok(start.microScale < middle.microScale);
   assert.ok(middle.microScale < end.microScale);
 });
