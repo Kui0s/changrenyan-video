@@ -5,6 +5,9 @@ const {
   gaitState,
   cameraState,
   glucoseState,
+  transitionState,
+  muscleState,
+  MICRO_LAYOUT,
 } = require('../src/motion-model.js');
 
 test('gait alternates planted feet while keeping joint motion continuous', () => {
@@ -20,17 +23,18 @@ test('gait alternates planted feet while keeping joint motion continuous', () =>
   }
 });
 
-test('camera follows the same right-leg anchor before entering the tissue view', () => {
-  const start = cameraState(4.0);
-  const middle = cameraState(5.5);
-  const end = cameraState(7.0);
+test('camera follows the supplied right-leg joint target before entering the tissue view', () => {
+  const target = [684, 1088];
+  const start = cameraState(4.0, target);
+  const middle = cameraState(5.5, target);
+  const end = cameraState(7.0, target);
 
   assert.equal(start.anchor, 'right-leg');
   assert.equal(middle.anchor, 'right-leg');
   assert.equal(end.anchor, 'right-leg');
   assert.ok(middle.zoom > start.zoom);
   assert.ok(end.zoom > middle.zoom);
-  assert.ok(Math.abs(middle.focus[0] - start.focus[0]) < 220);
+  assert.deepEqual(end.focus, target);
 });
 
 test('glucose crosses capillary wall, interstitial space, and muscle membrane in order', () => {
@@ -46,4 +50,33 @@ test('glucose crosses capillary wall, interstitial space, and muscle membrane in
   for (let i = 1; i < checkpoints.length; i += 1) {
     assert.ok(checkpoints[i].x > checkpoints[i - 1].x);
   }
+  assert.ok(checkpoints[1].x >= MICRO_LAYOUT.capillaryWall[0]);
+  assert.ok(checkpoints[1].x <= MICRO_LAYOUT.capillaryWall[1]);
+  assert.ok(checkpoints[2].x > MICRO_LAYOUT.capillaryWall[1]);
+  assert.ok(checkpoints[2].x < MICRO_LAYOUT.muscleMembrane[0]);
+  assert.ok(checkpoints[3].x >= MICRO_LAYOUT.muscleMembrane[0]);
+  assert.ok(checkpoints[3].x <= MICRO_LAYOUT.muscleMembrane[1]);
+});
+
+test('transition fades the walker before the microscopic diagram fills the page', () => {
+  const start = transitionState(5.2);
+  const middle = transitionState(6.1);
+  const end = transitionState(6.8);
+
+  assert.ok(start.macroAlpha > 0.9);
+  assert.ok(start.microAlpha < 0.1);
+  assert.ok(middle.macroAlpha < 0.55);
+  assert.ok(middle.microAlpha > 0.45);
+  assert.equal(end.macroAlpha, 0);
+  assert.equal(end.microAlpha, 1);
+  assert.ok(start.microScale < middle.microScale);
+  assert.ok(middle.microScale < end.microScale);
+});
+
+test('muscle contraction is visible at phone scale while preserving cell area directionally', () => {
+  const relaxed = muscleState(7.0);
+  const contracted = muscleState(7.4);
+
+  assert.ok(relaxed.width - contracted.width >= 40);
+  assert.ok(contracted.height - relaxed.height >= 55);
 });

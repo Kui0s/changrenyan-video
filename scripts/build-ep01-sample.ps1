@@ -17,6 +17,15 @@ function Assert-NativeSuccess([string]$step) {
     if ($LASTEXITCODE -ne 0) { throw "$step failed with exit code $LASTEXITCODE" }
 }
 
+$repoRoot = [System.IO.Path]::GetFullPath($repoRoot)
+$artifactRoot = [System.IO.Path]::GetFullPath($artifactRoot)
+$expectedArtifactPrefix = $repoRoot.TrimEnd([System.IO.Path]::DirectorySeparatorChar) + [System.IO.Path]::DirectorySeparatorChar
+if (-not $artifactRoot.StartsWith($expectedArtifactPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+    throw "artifact directory escapes repository: $artifactRoot"
+}
+if (Test-Path -LiteralPath $artifactRoot) {
+    Remove-Item -LiteralPath $artifactRoot -Recurse -Force
+}
 New-Item -ItemType Directory -Force -Path $logRoot, $browserRoot | Out-Null
 
 if (-not (Test-Path -LiteralPath (Join-Path $upstreamRoot ".git"))) {
@@ -25,6 +34,11 @@ if (-not (Test-Path -LiteralPath (Join-Path $upstreamRoot ".git"))) {
     Assert-NativeSuccess "clone upstream"
 }
 
+$dirtyBefore = @(git -C $upstreamRoot status --porcelain)
+Assert-NativeSuccess "inspect upstream status"
+if ($dirtyBefore.Count -gt 0) {
+    throw "upstream checkout contains local changes; preserve it and build from a clean isolated checkout instead"
+}
 $origin = (git -C $upstreamRoot remote get-url origin).Trim()
 Assert-NativeSuccess "read upstream origin"
 if ($origin -ne "https://github.com/cth9191/animate.git") {
@@ -37,6 +51,9 @@ Assert-NativeSuccess "checkout upstream commit"
 $actualCommit = (git -C $upstreamRoot rev-parse HEAD).Trim()
 Assert-NativeSuccess "read upstream commit"
 if ($actualCommit -ne $upstreamCommit) { throw "upstream commit mismatch: $actualCommit" }
+$dirtyAfter = @(git -C $upstreamRoot status --porcelain)
+Assert-NativeSuccess "verify upstream cleanliness"
+if ($dirtyAfter.Count -gt 0) { throw "upstream checkout is not clean at the pinned commit" }
 
 Push-Location $repoRoot
 try {
@@ -81,7 +98,7 @@ try {
         Set-Content -LiteralPath (Join-Path $artifactRoot "ffprobe.json") -Encoding utf8NoBOM
     Assert-NativeSuccess "probe sample"
 
-    & $ffmpegPath -hide_banner -i $sampleVideo -vf "blackdetect=d=0.08:pix_th=0.10,freezedetect=n=-45dB:d=0.5" -an -f null NUL 2>&1 |
+    & $ffmpegPath -nostats -hide_banner -i $sampleVideo -vf "blackdetect=d=0.08:pix_th=0.10,freezedetect=n=-45dB:d=0.5" -an -f null NUL 2>&1 |
         Tee-Object -FilePath (Join-Path $logRoot "frame-integrity.log")
     Assert-NativeSuccess "frame integrity scan"
 
@@ -97,6 +114,12 @@ try {
         Copy-Item -LiteralPath (Join-Path $pieceRoot "review/$name") -Destination (Join-Path $artifactRoot $name) -Force
     }
 
+    $fontFiles = @("C:/Windows/Fonts/simkai.ttf", "C:/Windows/Fonts/msyh.ttc") | Where-Object { Test-Path -LiteralPath $_ }
+    if ($fontFiles.Count -eq 0) { throw "no approved Simplified Chinese font is installed" }
+    $playwrightVersion = (& (Join-Path $repoRoot "node_modules/.bin/playwright.cmd") --version).Trim()
+    $browserRevisions = (Get-ChildItem -LiteralPath $browserRoot -Directory | Sort-Object Name | Select-Object -ExpandProperty Name) -join ","
+    $sourceCommit = (git rev-parse HEAD).Trim()
+    Assert-NativeSuccess "read source commit"
     $environment = @(
         (git --version),
         (node --version),
@@ -107,15 +130,35 @@ try {
         "os=$([System.Environment]::OSVersion.VersionString)",
         "upstream_origin=$origin",
         "upstream_commit=$actualCommit",
-        "playwright_browsers_path=$browserRoot"
+        "upstream_clean=true",
+        "playwright_version=$playwrightVersion",
+        "playwright_browser_revisions=$browserRevisions",
+        "playwright_browsers_path=$browserRoot",
+        "source_commit=$sourceCommit"
     )
-    foreach ($font in @("C:/Windows/Fonts/simkai.ttf", "C:/Windows/Fonts/msyh.ttc")) {
-        if (Test-Path -LiteralPath $font) {
-            $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $font).Hash.ToLowerInvariant()
-            $environment += "font=$font sha256=$hash"
-        }
+    foreach ($font in $fontFiles) {
+        $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $font).Hash.ToLowerInvariant()
+        $environment += "font=$font sha256=$hash"
     }
     $environment | Set-Content -LiteralPath (Join-Path $artifactRoot "environment.txt") -Encoding utf8NoBOM
+
+    $sampleHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $sampleVideo).Hash.ToLowerInvariant()
+    $delivery = @"
+# EP01 original 15-second sample delivery
+
+- Source commit: ``$sourceCommit``
+- Upstream engine: ``cth9191/animate@$actualCommit``
+- Master video: ``sample.mp4``
+- Master SHA-256: ``$sampleHash``
+- Format: 1080×1920, 24fps, 360 frames, 15.000 seconds, H.264/AAC
+
+## Evidence and scope
+
+The package contains the master video, 360×640 preview, 0.5-second contact sheet, 0.25-second shot sheets, phone sheet, media probe, deterministic sampled-frame check, tests, build/review logs, environment/font hashes, and a SHA-256 manifest.
+
+The final 13–15 seconds intentionally hold the complete two-boundary route for reading. Formal Mandarin narration, a clean second-machine rebuild, final independent PASS, full-episode production, merge, and publication are not claimed.
+"@
+    $delivery | Set-Content -LiteralPath (Join-Path $artifactRoot "DELIVERY.md") -Encoding utf8NoBOM
 
     Get-ChildItem -LiteralPath $artifactRoot -Recurse -File |
         Where-Object Name -ne "manifest.sha256" |

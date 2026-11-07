@@ -8,7 +8,7 @@ Copyright (c) 2026 cth9191
 
 Licensed under the MIT License. Permission is granted, free of charge, to any person obtaining a copy of this software and associated documentation files to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies, subject to inclusion of the copyright and permission notice. The software is provided without warranty of any kind.
 
-The complete license text remains available in the pinned upstream checkout at `third_party/animate/LICENSE` during a reproducible build.
+The complete, exact upstream license text is committed at `licenses/cth9191-animate-MIT.txt` and is also verified in the pinned checkout during a reproducible build.
 
 ## npm development dependencies
 
