@@ -98,9 +98,12 @@ try {
         Set-Content -LiteralPath (Join-Path $artifactRoot "ffprobe.json") -Encoding utf8NoBOM
     Assert-NativeSuccess "probe sample"
 
+    $frameIntegrityLog = Join-Path $logRoot "frame-integrity.log"
     & $ffmpegPath -nostats -hide_banner -i $sampleVideo -vf "blackdetect=d=0.08:pix_th=0.10,freezedetect=n=-45dB:d=0.5" -an -f null NUL 2>&1 |
-        Tee-Object -FilePath (Join-Path $logRoot "frame-integrity.log")
+        Tee-Object -FilePath $frameIntegrityLog
     Assert-NativeSuccess "frame integrity scan"
+    @(Get-Content -LiteralPath $frameIntegrityLog) | ForEach-Object { $_.TrimEnd() } |
+        Set-Content -LiteralPath $frameIntegrityLog -Encoding utf8NoBOM
 
     Push-Location $upstreamRoot
     try {
