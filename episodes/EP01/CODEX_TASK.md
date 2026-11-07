@@ -4,7 +4,7 @@
 
 ## 不可省略的阅读
 
-先阅读 `AGENTS.md`、`docs/WORKFLOW.md`、`docs/STYLE_BASELINE.md`、`docs/UPSTREAM_SOURCES.md`、`docs/MOTION_REQUIREMENTS.md`、`docs/SCORE_RUBRIC.md`、`episodes/EP01/RESEARCH.md`、`episodes/EP01/SCRIPT.md`、`episodes/EP01/DIRECTOR.md`、`episodes/EP01/SAMPLE_15S.md`。
+先阅读 `AGENTS.md`、`docs/WORKFLOW.md`、`docs/VOICE_AND_DURATION_POLICY.md`、`docs/STYLE_BASELINE.md`、`docs/UPSTREAM_SOURCES.md`、`docs/MOTION_REQUIREMENTS.md`、`docs/SCORE_RUBRIC.md`、`episodes/EP01/RESEARCH.md`、`episodes/EP01/SCRIPT.md`、`episodes/EP01/DIRECTOR.md`、`episodes/EP01/SAMPLE_15S.md`。
 
 ## 阶段0：真实克隆并复现 GitHub 原仓库（可在导演稿审核时并行）
 
@@ -32,11 +32,15 @@ git -C .\third_party\animate rev-parse HEAD
 
 ## 阶段2：Sketchbook 风格的15秒原创样片
 
-1. 完成 `SAMPLE_15S.md` 的四段连续动作和临时中文配音、同步字幕及必要音效。
+1. 完成 `SAMPLE_15S.md` 的四段连续动作；临时中文配音、字幕及音效可选，**最终正式配音与字幕同步留给后期剪辑**，无需提前锁定剪映声音或用户本人录音。
 2. **禁止**：三个静态绘制页面做淡入淡出；单独给每张图做全局scale/position动画；空镜长停留；用字体/颗粒跳动代替人物行动和科学机制。
 3. 在低分辨率预览中逐镜头查姿态与运动，提交0.2–0.5秒连续抽帧、关键帧、真实MP4，不得以2–3张风格图代替样片。
 4. 自动检查关键时间点动画状态/帧差，人工回看运动是否有叙事意义；工程测试不代表内容审美自动通过。
 5. 为独立审核提交所有证据：工作commit/视频hash/完整运行命令/渲染耗时/依赖版本/源码清单/许可/已知失败项。
+
+## 时长及配音边界
+
+完整成片≤120秒；旧68秒只是示意时间轴。15秒原创技术样片维持单独约15秒规格以验证动作，未选定的正式配音不构成此阶段证据缺失。配音/字幕 A 维在完整成片阶段必须实测并按固定评分权重审核；见 `docs/VOICE_AND_DURATION_POLICY.md`。
 
 ## 明确的阶段门禁
 
