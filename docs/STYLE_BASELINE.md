@@ -34,12 +34,14 @@
 
 `crosshatch` 仍作为已复现的**历史技术参考**保存在 PR #3；不得与 Sketchbook 画风混用并宣称仍是同一系列视觉风格。今后若需要更换系列画风，必须先提出专门变更并取得用户批准。
 
-## 尚需 Codex 完成的工程工作
+## 当前授权的下一个工程阶段
 
-- 在独立原创样片工程中，使用固定上游版本的 Sketchbook `kit.js`、共用引擎和可复现工具链。
+- 现在执行 [Issue #4](https://github.com/Kui0s/changrenyan-video/issues/4) 的原创15秒样片，使用固定上游版本的 Sketchbook `kit.js`、共用引擎和可复现工具链。
 - 原样保留上游副本，新增 EP01 人物、步态、镜头及微观机制场景代码，清楚登记继承/修改/原创的代码边界。
 - 输出约15秒原创动画、连续帧、源码 diff、运行命令、哈希、完整许可证记录。
 - 源码和视觉**正式工程基线**只有在原创样片独立审核合格、用户验收后，才能记录为稳定的 `series_derived_engine_baseline_commit`；不能仅凭官方 Demo 的成功来冻结改造后的代码。
-- 独立导演稿审核仍未通过（`NOT_VERIFIED`），不得把风格确认理解成导演或样片自动放行。
+- **导演文字审核已由独立 ROUND 03 得分90.0/100 PASS**，用户现已授权执行原创15秒样片；但《常人言》原创绘图/动画工程基线与实际画风品质**尚未验证**。不得把导演稿PASS转移成新视频PASS。
 
 后续参见 `episodes/EP01/ORIGINAL_SAMPLE_TASK.md` 与 [Issue #4](https://github.com/Kui0s/changrenyan-video/issues/4)。
+
+> 当前完整执行顺序和源代码链接以仓库根 [CODEX_START_HERE.md](../CODEX_START_HERE.md) 为准；不得重复等待已通过的导演稿审核。
