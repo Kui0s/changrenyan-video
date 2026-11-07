@@ -1,0 +1,13 @@
+# Local source checkout and toolchain (do not commit upstream wholesale)
+third_party/
+.tools/
+node_modules/
+**/node_modules/
+
+# Local intermediate render caches and private working media
+.cache/
+tmp/
+*.log
+
+# Original EP01 samples must be uploaded deliberately with hash/provenance,
+# not accidentally embedded inside a bulk ignored directory.
