@@ -1,65 +1,48 @@
-# 常人言｜代码动画短视频系列
+# 常人言｜Sketchbook 代码动画短视频系列
 
-> 项目状态：**Sketchbook 风格已确认，上游官方 Demo 复现通过；ROUND 01/02 导演审核均未获正式PASS（ROUND 02文字诊断86.0），已完成文字定向返工 v1.5/v2.4，待 ROUND 03 独立复评。用户已决定配音留到后期、成片≤120秒。原创15秒样片和全片均尚未制作。**
+> **EP01 当前状态：原创15秒技术样片 READY_TO_EXECUTE。** [ROUND 03 独立导演稿审核](./episodes/EP01/reviews/ROUND_03.md)对 `SCRIPT v1.5 / DIRECTOR v2.4` 给出正式 **90.0/100 PASS**；用户已确认唯一Sketchbook画风，并要求完成工程准备后可直接让Codex按仓库任务开工。**这仅允许开始原创15秒样片与并行03/06预演；未批准整部正片制作或发布。**
 >
-> 当前基线：`SCORE_RUBRIC v1.0`（固定计分标准），`AUDIT_CHECKLIST v1.1`（可逐轮细化的检查项）。
+> **Codex 请直接从 [CODEX_START_HERE.md](./CODEX_START_HERE.md) 开始执行，不必重新询问导演稿是否通过、画风是哪种或声音在哪里。** 严格区分“仓库资源/任务就绪”和“当前执行机器依赖已经安装”：后者必须在 Codex 开始时实际检查。
 
-## 目标
+## 目标与事实
 
-以**不超过120秒**、9:16 的中文代码动画，解释一句熟悉俗语背后的可证实机制与适用边界。第一期为《饭后走一走，活到九十九》。“九十九”代表健康长寿，不是精准寿命承诺。
+EP01：《饭后走一走，活到九十九》，以科学证据解释俗语健康长寿的寓意，不宣称散步能保证某个寿命。目标9:16、Sketchbook原生代码手绘、**完整视频严格少于120秒**；中文声音在后期使用剪映AI朗读或用户本人录制，自然速度即可。
 
-**固定美术风格、开放镜头语言。** 动画采用从 GitHub 完整开源源码实际复现并扩展的绘图系统；不以截图临摹替代真实源代码。人物、场景、相机、转场和科学图示均可程序化生成，不预设用户提供 PNG/SVG 素材。
+**拒绝幻灯片动画**：角色、镜头、场景、组织结构及葡萄糖符号需要真实随时间演化；连贯肢体运动和有意义的转场优先，允许为读图有目的地稳定画面，但不能靠静态帧轮播、图片全局放大或笔触抖动伪装成叙事。
 
-**真实动画，不是图片轮播。** 每个主要段落都有叙事所需的连续动作、可见状态变化及因果衔接；禁止用几张静帧加缩放/淡入淡出冒充完整导演和动画制作。参见 `docs/MOTION_REQUIREMENTS.md`。
+## 已确认和未完成
 
-## 职责与门禁
-
-| 身份 | 职责 |
+| 事项 | 状态与证据 |
 |---|---|
-| 用户 | 最终决定系列风格、关键审美取舍、阶段放行与发布 |
-| ChatGPT（创作端） | 研究、口播、导演稿、文字分镜、解释准确性；维护内容包 |
-| 独立 GPT 审核端 | 不参与原稿写作，审核内容/观众理解/视频叙事，提供问题证据 |
-| Codex（工程端） | 克隆原仓库、复现 Demo、封装绘图、镜头和动画代码、渲染；提交产物和测试证据 |
-| 独立 Codex 审核端 | 不直接参与被评审工程修改，审源码、动态性、渲染可重建性和工程风险 |
+| 固定审核制度 | [`docs/SCORE_RUBRIC.md v1.0`](./docs/SCORE_RUBRIC.md)，90分、单项≥3.5、无硬否决；**完全不变** |
+| 研究、口播、导演稿 | [`SCRIPT v1.5`](./episodes/EP01/SCRIPT.md)、[`DIRECTOR v2.4`](./episodes/EP01/DIRECTOR.md)，独立 [ROUND 03 **90.0 PASS**](./episodes/EP01/reviews/ROUND_03.md) |
+| 唯一风格 | [Sketchbook，已获用户确认](./docs/STYLE_BASELINE.md)；上游 `cth9191/animate@7e5eb56feb2dd573f890e1b7b34748af43d58263` |
+| 上游官方Demo | [PR #3](https://github.com/Kui0s/changrenyan-video/pull/3) **源码重建PASS**，但该PR处于Draft，动画不是《常人言》原创；其复现脚本已复制进本仓库 `scripts/` |
+| 原创15秒样片 | **READY_TO_EXECUTE / NOT PRODUCED**，[Issue #4](https://github.com/Kui0s/changrenyan-video/issues/4)，下一工程主任务 |
+| 镜头03、06预演 | [Issue #5](https://github.com/Kui0s/changrenyan-video/issues/5)，与样片并行，不是导演文字审核前置条件 |
+| 原创代码可重建性/第三方许可 | **待Codex本轮提交实物、锁定依赖并接受独立代码审查**；不能以旧Demo成功替代 |
+| 成片、真实中文配音、完整质量审核 | **NOT PRODUCED**；需样片通过90分、用户另外同意全片后才执行 |
 
-阶段：**内容研究与导演稿 → 独立导演审核 → 原仓库复现及15秒样片 → 双独立审核 → 全片制作 → 成片双独立审核（至少90分）→ 用户确认、经验入库**。
+## 执行入口与重要文档
 
-在导演稿尚未通过前，Codex 可以开展 `git clone`、依赖审计及原 Demo 复现，但不应将正式样片或成片宣称获准制作。
+| 位置 | 用途 |
+|---|---|
+| [`CODEX_START_HERE.md`](./CODEX_START_HERE.md) | **唯一当前执行入口**：资源地址、克隆指令、依赖检查、阶段授权及工程顺序 |
+| [`AGENTS.md`](./AGENTS.md) | Codex安全边界、交付纪律和事实来源 |
+| [`episodes/EP01/ORIGINAL_SAMPLE_TASK.md`](./episodes/EP01/ORIGINAL_SAMPLE_TASK.md) | 15秒原创动画的具体动态动作/镜头与源代码要求 |
+| [`episodes/EP01/SAMPLE_15S.md`](./episodes/EP01/SAMPLE_15S.md) | 分秒画面验收 |
+| [`episodes/EP01/QA_HANDOFF.md`](./episodes/EP01/QA_HANDOFF.md) | MP4/源码/差异/日志的交付、独立 GPT+Codex 评分、下一阶段门禁 |
+| [`episodes/EP01/ANIMATIC_VALIDATION_TASK.md`](./episodes/EP01/ANIMATIC_VALIDATION_TASK.md) | 并行03/06镜头动态预演，不重复05样片 |
+| [`docs/STYLE_BASELINE.md`](./docs/STYLE_BASELINE.md) | Sketchbook真实源码风格与固定版本 |
+| [`docs/UPSTREAM_SOURCES.md`](./docs/UPSTREAM_SOURCES.md) | 主上游和其他可选技术参考，以及许可证风险 |
+| [`docs/MOTION_REQUIREMENTS.md`](./docs/MOTION_REQUIREMENTS.md) | 防静态幻灯片与连续运动验收 |
+| [`docs/VOICE_AND_DURATION_POLICY.md`](./docs/VOICE_AND_DURATION_POLICY.md) | 后期配音与总时长<120秒，导演文本阶段无需终配音 |
+| [`docs/WORKFLOW.md`](./docs/WORKFLOW.md) | 协作、独立审核、返工、版本流程 |
 
-## 文件导航
+历史审稿按 `episodes/EP01/reviews/` 分轮归档：ROUND 01 79.3（诊断/NO_GO）、ROUND 02 86.0（诊断/NO_GO）、[ROUND 03 90.0（正式导演文字阶段PASS）](./episodes/EP01/reviews/ROUND_03.md)。不得覆盖历史评审、把导演文字90分直接迁移为真实视频90分。
 
-- `docs/WORKFLOW.md`：交接、审核、返工、阻塞与权限。
-- `docs/VOICE_AND_DURATION_POLICY.md`：2026-11-06用户确认的配音延期至剪辑、正式成片≤120秒的阶段规则。
-- `docs/SCORE_RUBRIC.md`：固定的100分评分维度、权重、门槛与硬性否决。
-- `docs/AUDIT_CHECKLIST.md`：会随实物缺陷增加的检查项；不得改变评分尺度。
-- `docs/MOTION_REQUIREMENTS.md`：避免“幻灯片视频”的工程约束及可执行测试。
-- `docs/STYLE_BASELINE.md`：用户已批准 Sketchbook 唯一系列画风；原创派生工程基线仍待样片验证。
-- `docs/UPSTREAM_SOURCES.md`：GitHub 源码来源、路径、可复现要求及许可证。
-- `episodes/EP01/RESEARCH.md`：科学证据与禁用论点。
-- `episodes/EP01/SCRIPT.md`：口播文案。
-- `episodes/EP01/DIRECTOR.md`：完整逐镜头导演稿与动作编排。
-- `episodes/EP01/SAMPLE_15S.md`：15秒样片要求。
-- `episodes/EP01/ORIGINAL_SAMPLE_TASK.md`：区别于上游官方 Demo 复现的原创动画能力验证任务。
-- `episodes/EP01/CODEX_TASK.md`：交给 Codex 的可执行工程任务。
-- `episodes/EP01/reviews/ROUND_00.md`：早期初始状态卡（历史存档）。
-- `episodes/EP01/reviews/UPSTREAM_PROVENANCE_AUDIT.md`：上游复现与原创能力来源审计。
-- `episodes/EP01/reviews/CREATOR_PRE_REVIEW_R01.md`：内容端初期修订记录；**不是独立审核通过**。
-- `episodes/EP01/reviews/ROUND_01.md`：首轮独立导演审核，**REVISE/NO_GO**（历史诊断79.3）。
-- `episodes/EP01/reviews/ROUND_02.md`：二轮独立导演审核，**REVISE/NO_GO**（历史诊断86.0）；历史证据要求不追溯改写。
-- `episodes/EP01/reviews/CREATOR_REVISION_R02.md`：针对ROUND 01的逐项整改记录；**不是独立审核**。
-- `episodes/EP01/reviews/CREATOR_REVISION_R03.md`：针对ROUND 02的定向返工记录，口播与导演稿已升至 v1.5/v2.4；**不是独立审核**。
-- `episodes/EP01/VOICE_TIMING_PROBE_R02.md`：历史低保真eSpeak测时；**只作为参考，不再阻塞导演文字审核；后期成片再验正式声音**。
-- `AGENTS.md`：Codex 工作权限与禁止事项。
+## 角色及工程门禁
 
-## 当前事实状态
+ChatGPT负责研究/口播/导演内容；Codex负责实际克隆源码、编写新的 EP01 人物/动态/科学镜头、渲染和提交工程证据。**原创样片完成后先由独立 GPT 看视频，再由未参与编写的独立 Codex 审源码与可复现性**。按固定评分适用维度加权≥90、适用单项≥3.5且无否决/缺证据，才能建议用户决定进入完整正片。
 
-- [x] 研究来源初步核查并整理（仍需独立内容审核）
-- [x] EP01 已有新一轮创作端修订稿（以主分支 `episodes/EP01/SCRIPT.md` / `DIRECTOR.md` 最新版本为准）；ROUND 02历史结论仍是 **REVISE/NO_GO**，最新内容须单独进行 ROUND 03 独立审核
-- [x] 固定评分尺度与动态性审核规则
-- [x] 创建独立 GitHub 远程仓库并上传首批项目文件
-- [ ] 独立导演审核正式≥90分放行（[ROUND 01 NO_GO](https://github.com/Kui0s/changrenyan-video/blob/main/episodes/EP01/reviews/ROUND_01.md)，[Issue #1](https://github.com/Kui0s/changrenyan-video/issues/1) 已明确固定90分关口）
-- [x] Codex 在工程分支重建上游官方 Demo（[PR #3](https://github.com/Kui0s/changrenyan-video/pull/3)，来源审计 PASS；不是原创样片）
-- [x] 用户确认 Sketchbook 为唯一系列手绘画风（源码上游 commit 已记录；**原创派生工程基线尚待验证**）
-- [ ] [#4](https://github.com/Kui0s/changrenyan-video/issues/4) 15秒**原创**代码动画样片（非上游 Demo）
-- [ ] 样片90分审核及用户放行
-- [ ] ≤120秒成片（配音可用剪映AI或本人）、90分完整音画审核、发布批准
+**用户不需要重新提供上游URL、声线、画风或脚本；工程端直接按入口执行。** 若本机依赖缺失，Codex自己排查并记录，不可宣称远程文档已证明本机就绪。未经样片评审和用户决定，不自动合并主分支、不直接制作/发布全片。
