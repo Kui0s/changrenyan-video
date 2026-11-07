@@ -1,6 +1,6 @@
 # EP01 original 15-second sample delivery
 
-- Source commit: `d6eaf7d95638192a8edda61a7c7ed0e0fb9751db`
+- Source commit: `d003134a14257a50aa1a166f0df34aebf7fa8ac6`
 - Upstream engine: `cth9191/animate@7e5eb56feb2dd573f890e1b7b34748af43d58263`
 - Master video: `sample.mp4`
 - Master SHA-256: `d53a5a28393fb385e2fb5fa072a0febced09a5663e13ce892106133bb8da450a`

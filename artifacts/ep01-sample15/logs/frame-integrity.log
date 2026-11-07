@@ -28,9 +28,9 @@ Output #0, null, to 'NUL':
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
       encoder         : Lavc60.31.102 wrapped_avframe
-[freezedetect @ 000001c919f24700] lavfi.freezedetect.freeze_start: 13.25
-[freezedetect @ 000001c919f24700] lavfi.freezedetect.freeze_duration: 0.5
-[freezedetect @ 000001c919f24700] lavfi.freezedetect.freeze_end: 13.75
-[freezedetect @ 000001c919f24700] lavfi.freezedetect.freeze_start: 13.75
-[out#0/null @ 000001c917d9a380] video:169kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
-frame=  360 fps=0.0 q=-0.0 Lsize=N/A time=00:00:14.95 bitrate=N/A speed=25.3x    
+[freezedetect @ 000001cf7e564f80] lavfi.freezedetect.freeze_start: 13.25
+[freezedetect @ 000001cf7e564f80] lavfi.freezedetect.freeze_duration: 0.5
+[freezedetect @ 000001cf7e564f80] lavfi.freezedetect.freeze_end: 13.75
+[freezedetect @ 000001cf7e564f80] lavfi.freezedetect.freeze_start: 13.75
+[out#0/null @ 000001cf7c75a380] video:169kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+frame=  360 fps=0.0 q=-0.0 Lsize=N/A time=00:00:14.95 bitrate=N/A speed=22.7x
