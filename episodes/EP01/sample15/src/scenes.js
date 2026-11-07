@@ -4,36 +4,33 @@ const MM = EP01Motion;
 function ease01(v) { return EZ.io(clamp(v)); }
 function fadeBetween(t, a, b) { return 1 - ease01((t - a) / (b - a)); }
 
-function drawLimb(P, key, width = 16, col = SK.ink) {
-  gpencil(P, { key: key + '-p', w: width + 8, col: SK.graph, a: 0.38, amp: 1.5 });
-  gline(P, { key, w: width, col, amp: 1.1, step: 9 });
+function drawLimb(P, key, width = 16, col = SK.ink, opacity = 1) {
+  gpencil(P, { key: key + '-p', w: width + 8, col: SK.graph, a: 0.38 * opacity, amp: 1.5 });
+  gline(P, { key, w: width, col, a: opacity, amp: 1.1, step: 9 });
   P.slice(1, -1).forEach(([x, y], i) => {
     const joint = loopPts(x, y, width * 0.72, width * 0.72, 0.08, 0, 18);
-    gfill(joint, SK.paper, { key: key + '-jf' + i, off: [0, 0], a: 0.9 });
-    gline(joint, { key: key + '-j' + i, w: 3.2, closed: true, amp: 0.7 });
+    gfill(joint, SK.paper, { key: key + '-jf' + i, off: [0, 0], a: 0.9 * opacity });
+    gline(joint, { key: key + '-j' + i, w: 3.2, closed: true, a: opacity, amp: 0.7 });
   });
 }
 
-function drawWalker(t, alpha) {
+function drawWalker(t) {
   const progress = t * 0.75;
   const s = MM.gaitState(progress);
   const worldX = 170 + Math.min(t, 4.9) * 135;
   const hipY = s.hipY;
-  const rightHip = [worldX + 22, hipY];
-  const leftHip = [worldX - 22, hipY];
+  const rightHip = [worldX + 28, hipY];
+  const leftHip = [worldX - 28, hipY];
   const point = (p, hip) => [hip[0] + p[0], hip[1] + p[1]];
   const right = [rightHip, point(s.right.knee, rightHip), point(s.right.ankle, rightHip), point(s.right.toe, rightHip)];
   const left = [leftHip, point(s.left.knee, leftHip), point(s.left.ankle, leftHip), point(s.left.toe, leftHip)];
   const target = [(right[1][0] + right[2][0]) / 2, (right[1][1] + right[2][1]) / 2];
-  const cam = MM.cameraState(t);
-  const cameraU = ease01((t - 4) / 2.7);
-  const zoom = lerp(1, 2.45, cameraU);
+  const cam = MM.cameraState(t, target);
 
   ctx.save();
-  ctx.globalAlpha = alpha;
   ctx.translate(540, 1030);
-  ctx.scale(zoom, zoom);
-  ctx.translate(-lerp(540, target[0], cameraU), -lerp(1030, target[1], cameraU));
+  ctx.scale(cam.zoom, cam.zoom);
+  ctx.translate(-cam.focus[0], -cam.focus[1]);
 
   const groundY = 1288;
   gpencil([[50, groundY], [350, groundY - 4], [700, groundY + 5], [1030, groundY]], { key: 'walk-ground', w: 3.2, a: 0.58 });
@@ -42,7 +39,7 @@ function drawWalker(t, alpha) {
     gpencil([[fx, groundY - 3], [fx + 48, groundY + 3]], { key: 'footmark' + i, w: 5, a: 0.2 + 0.3 * clamp((t * 170 - fx + 300) / 180), passes: 1 });
   }
 
-  drawLimb(left, 'left-leg');
+  drawLimb(left, 'left-leg', 13, SK.graph, 0.72);
   drawLimb(right, 'right-leg', 18, SK.ink);
 
   ctx.save();
@@ -81,30 +78,33 @@ function roundedCellPoints(x, y, w, h) {
 }
 
 function drawBoundaryLabel(text, x, y, key, reveal) {
-  handLetter(text, x, y, 42, { col: SK.ink, align: 'center', reveal, key, jit: 0.6, stroke: 0.8 });
+  handLetter(text, x, y, 48, { col: SK.ink, align: 'center', reveal, key, jit: 0.6, stroke: 0.9 });
 }
 
-function drawMicro(t, alpha, transitionU) {
+function drawMicro(t, transition) {
   const state = MM.glucoseState(t);
-  const contract = t < 13 ? 0.5 + 0.5 * Math.sin((t - 7) * Math.PI * 1.25) : 0;
-  const cellW = 316 - contract * 18;
-  const cellH = 690 + contract * 22;
-  const cellX = 728 + (316 - cellW) / 2;
-  const cellY = 535 - (cellH - 690) / 2;
+  const muscleState = MM.muscleState(t);
+  const contract = muscleState.contraction;
+  const base = MM.MICRO_LAYOUT.muscleBase;
+  const cellW = muscleState.width;
+  const cellH = muscleState.height;
+  const cellX = base.x + (base.w - cellW) / 2;
+  const cellY = base.y - (cellH - base.h) / 2;
 
   ctx.save();
-  ctx.globalAlpha = alpha;
-  if (transitionU < 1) {
-    const scale = lerp(0.14, 1, transitionU);
-    const ox = lerp(690, 540, transitionU), oy = lerp(1090, 930, transitionU);
+  if (transition.microScale < 1) {
+    const scale = transition.microScale;
+    const ox = lerp(690, 540, transition.microAlpha), oy = lerp(1090, 930, transition.microAlpha);
     ctx.translate(ox, oy);
     ctx.scale(scale, scale);
     ctx.translate(-540, -930);
   }
 
   // Capillary lumen and its double-lined wall.
-  const outerVessel = sketchBox(92, 510, 330, 760, 86, 0.025);
-  const innerVessel = sketchBox(116, 538, 282, 704, 70, 0.02);
+  const vesselOuter = MM.MICRO_LAYOUT.vesselOuter;
+  const vesselInner = MM.MICRO_LAYOUT.vesselInner;
+  const outerVessel = sketchBox(vesselOuter.x, vesselOuter.y, vesselOuter.w, vesselOuter.h, 86, 0.025);
+  const innerVessel = sketchBox(vesselInner.x, vesselInner.y, vesselInner.w, vesselInner.h, 70, 0.02);
   gfill(outerVessel, 'rgba(224,72,58,0.10)', { key: 'vessel-wash', off: [0, 0], a: 1 });
   gpencil(outerVessel, { key: 'vessel-outer-pencil', w: 5, a: 0.6, closed: true });
   gline(outerVessel, { key: 'vessel-outer', w: 7, col: SK.graph, closed: true });
@@ -147,10 +147,10 @@ function drawMicro(t, alpha, transitionU) {
   drawBoundaryLabel('毛细血管壁', 265, 1325, 'label-wall', labelsIn);
   drawBoundaryLabel('组织间隙', 555, 1325, 'label-space', labelsIn);
   drawBoundaryLabel('肌细胞膜', 850, 1325, 'label-membrane', labelsIn);
-  handLetter('葡萄糖转运', 718, 832, 34, { col: SK.graph, align: 'center', reveal: ease01((t - 10.7) / 0.7), key: 'label-gate', jit: 0.5 });
+  handLetter('葡萄糖转运', 708, 824, 42, { col: SK.graph, align: 'center', reveal: ease01((t - 10.7) / 0.7), key: 'label-gate', jit: 0.5 });
 
   // The tracked glucose particle leaves a persistent graphite route behind it.
-  const route = [[250, 860], [365, 860], [430, 860], [550, 895], [660, 895], [735, 895], [865, 895]];
+  const route = MM.glucoseStops.map((stop) => [stop.x, lerp(860, 895, ease01((stop.x - 430) / 250))]);
   const routePart = clamp(state.progress);
   ctx.save(); ctx.setLineDash([10, 12]);
   gpencil(route, { key: 'glucose-route', w: 4.2, a: 0.76, part: routePart, passes: 1 });
@@ -175,11 +175,9 @@ function drawMicro(t, alpha, transitionU) {
 
 function sceneSample() {
   sketchPage({ grid: 'dots' });
-  const microU = ease01((TT - 5.15) / 1.85);
-  const macroA = TT < 5.15 ? 1 : fadeBetween(TT, 5.15, 6.85);
-
-  if (TT < 6.25 && macroA > 0.01) drawWalker(TT, macroA);
-  if (microU > 0.001) drawMicro(TT, microU, microU);
+  const transition = MM.transitionState(TT);
+  if (transition.macroAlpha > 0.001) drawOnSampleLayer('macro', transition.macroAlpha, () => drawWalker(TT));
+  if (transition.microAlpha > 0.001) drawOnSampleLayer('micro', transition.microAlpha, () => drawMicro(TT, transition));
 
   if (TT < 4.2) {
     pageTag('动作测试');
@@ -191,4 +189,26 @@ function sceneSample() {
     pageTag('两道边界');
     pageCaption(['血管壁 → 组织间隙', '肌细胞膜 → 细胞内'], [[0, '组织间隙']], { y: 1420, size: 55 });
   }
+}
+
+const SAMPLE_LAYERS = {};
+function drawOnSampleLayer(name, alpha, draw) {
+  if (!SAMPLE_LAYERS[name]) {
+    const canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    SAMPLE_LAYERS[name] = canvas;
+  }
+  const canvas = SAMPLE_LAYERS[name];
+  const output = ctx;
+  ctx = canvas.getContext('2d');
+  ctx.save();
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+  ctx.restore();
+  draw();
+  ctx = output;
+  ctx.save();
+  ctx.globalAlpha *= alpha;
+  ctx.drawImage(canvas, 0, 0);
+  ctx.restore();
 }

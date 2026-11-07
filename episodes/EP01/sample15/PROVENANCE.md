@@ -5,6 +5,7 @@
 - Repository: `cth9191/animate`
 - Commit: `7e5eb56feb2dd573f890e1b7b34748af43d58263`
 - License: MIT, copyright 2026 cth9191
+- Committed full license: `licenses/cth9191-animate-MIT.txt`
 - Unchanged runtime components: `kit/core.js`, `kit/morph.js`, `kit/board.js`, `kit/score-head.js`, `kit/score-tail.js`, `styles/sketchbook/kit.js`, and rendering tools.
 
 The upstream checkout stays in ignored `third_party/animate/` and is not vendored wholesale. `scripts/build-ep01-sample.ps1` verifies the remote and exact commit before every reproducible build.
