@@ -1,0 +1,34 @@
+shot 1 (three continuous steps with shifting joints and centre of mass): 16 frames [0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90] -> review/shot01-sheet.jpg
+shot 2 (camera remains anchored to the moving right leg and reveals the inner view): 12 frames [96,102,108,114,120,126,132,138,144,150,156,162] -> review/shot02-sheet.jpg
+shot 3 (glucose crosses capillary wall, interstitial space, then muscle membrane): 24 frames [168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300,306] -> review/shot03-sheet.jpg
+shot 4 (the complete two-boundary route remains visible for reading): 8 frames [312,318,324,330,336,342,348,354] -> review/shot04-sheet.jpg
+
+CUTS vs beat grid @ 120 BPM, 24fps (8ths = 0.25s)
+ #   cut t     grid  grid#   nominal f  cut f   cut f t     err(f)  Δ@cut  peak(±2f)          shot change           result
+all cuts on grid within 1 frame: PASS
+
+PACING: 0 hard cuts (0 in the last 5s), mean segment 15.00s, shortest 15.00s, plus 0 on-2s montage steps
+FLAT FRAMES (contrast < 6/255): none
+LOOP: diff(last=359, first=0) = 9.98; typical consecutive diff in the first 40 frames = 1.34 (info: F4/F6 loop pixel-exactly and F4 checks it; other formats return to the opening image, changed)
+
+STORY ARC (loudness in dBFS over 100ms windows: median / 90th percentile; music = music stem median)
+ act          role       t0-t1         cuts  cuts/s  motion   mix med  mix p90  music
+ 1 Walk       action     0.00-4.00s      0    0.00     1.4   -120.0    -41.8  -120.0
+ 2 Follow     transition  4.00-7.00s      0    0.00     2.8   -120.0   -120.0  -120.0
+ 3 Uptake     mechanism  7.00-13.00s      0    0.00     0.6    -48.4    -20.2  -120.0
+ 4 Read       hold       13.00-15.00s      0    0.00     0.4   -120.0    -60.0  -120.0
+story arc: PASS (0/0 rules)
+
+TEXT (every string drawn, traced to screen; 64 frames sampled, morph windows skipped)
+text: PASS (0 cut-off/overlap, 0 in the safe zone)
+
+SOUND (mix: renders/audio.wav)
+  loudest 100ms window: 4.2s (-18.8 dBFS)
+  silence before it: 1.2s at <= -40 dBFS ending 4.2s in the 2s before (craft.md wants 0.5-4s when the story has a turn)
+  loudness: -21.3 LUFS integrated, range 6.0 LU, true peak -0.8 dBFS (phone target about -16 to -14 LUFS, peak <= -1)
+
+DEAD BEATS (the picture's change over 0.5s, every 0.25s; median 3.72, "still" below 0.93; silence acts are exempt)
+dead beats: PASS (0 stretches over 3s)
+PHONE SHEET: review\phone.jpg (one frame a second at 360px wide — read every caption at this size)
+
+video: 1080x1920, 360 frames decoded

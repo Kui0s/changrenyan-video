@@ -1,0 +1,15 @@
+
+> changrenyan-video@0.1.0 test
+> node --test episodes/EP01/sample15/test/*.test.js
+
+✔ gait alternates planted feet while keeping joint motion continuous (2.0925ms)
+✔ camera follows the same right-leg anchor before entering the tissue view (0.3649ms)
+✔ glucose crosses capillary wall, interstitial space, and muscle membrane in order (1.4078ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 155.2303
