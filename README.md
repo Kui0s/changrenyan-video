@@ -53,7 +53,7 @@
 ## 当前事实状态
 
 - [x] 研究来源初步核查并整理（仍需独立内容审核）
-- [x] EP01 旁白 v1.4 与导演稿 v2.3 定向修订稿（**ROUND 02已审：REVISE/NO_GO；仍需独立下一轮审核**）
+- [x] EP01 已有新一轮创作端修订稿（以主分支 `episodes/EP01/SCRIPT.md` / `DIRECTOR.md` 最新版本为准）；ROUND 02历史结论仍是 **REVISE/NO_GO**，最新内容须单独进行 ROUND 03 独立审核
 - [x] 固定评分尺度与动态性审核规则
 - [x] 创建独立 GitHub 远程仓库并上传首批项目文件
 - [ ] 独立导演审核正式≥90分放行（[ROUND 01 NO_GO](https://github.com/Kui0s/changrenyan-video/blob/main/episodes/EP01/reviews/ROUND_01.md)，[Issue #1](https://github.com/Kui0s/changrenyan-video/issues/1) 已明确固定90分关口）
