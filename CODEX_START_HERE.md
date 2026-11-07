@@ -83,6 +83,8 @@ git -C third_party/animate rev-parse HEAD
 
 必须新建工作分支及 PR，附至少：`sample.mp4`、新增`src`和动画工程配置、上游复用/修改/新作差异说明、上游完整SHA、本项目commit、MP4 SHA-256、时间码/0.25–0.5秒联系表、360×640手机预览、构建命令、原始日志、媒体探针、锁定依赖与授权清单。不得只是贴几张关键帧声称完成。
 
+审核Issue已提前建立：[Issue #6](https://github.com/Kui0s/changrenyan-video/issues/6)，在样片实际交付后按此执行独立双审；不代表现在审核已经发生。
+
 **不允许 Codex 自评签发质量PASS。** [`QA_HANDOFF.md`](./episodes/EP01/QA_HANDOFF.md) 规定独立 GPT + 独立 Codex 的分工和固定90分阶段门槛；失败就记录时间码、具体代码与修复验收。**样片合格以后才请求用户决定是否进入完整视频**。不要发布、不自动合并主分支。
 
 ## 6. 给执行端的最后一条指令
