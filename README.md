@@ -1,6 +1,6 @@
 # 常人言｜代码动画短视频系列
 
-> 项目状态：**内容与制作规范已建立；GitHub 远程仓库已建立；尚无已审核通过的 EP01 导演稿、源风格复现或成片。**
+> 项目状态：**已完成两套官方 Demo 源码复现（PR #3，仅在工程分支）；EP01 原创样片和完整成片尚未制作，导演稿独立审核与用户唯一风格选择待完成。**
 >
 > 当前基线：`SCORE_RUBRIC v1.0`（固定计分标准），`AUDIT_CHECKLIST v1.0`（可逐轮细化的检查项）。
 
@@ -38,19 +38,22 @@
 - `episodes/EP01/SCRIPT.md`：口播文案。
 - `episodes/EP01/DIRECTOR.md`：完整逐镜头导演稿与动作编排。
 - `episodes/EP01/SAMPLE_15S.md`：15秒样片要求。
+- `episodes/EP01/ORIGINAL_SAMPLE_TASK.md`：区别于上游官方 Demo 复现的原创动画能力验证任务。
 - `episodes/EP01/CODEX_TASK.md`：交给 Codex 的可执行工程任务。
-- `episodes/EP01/reviews/ROUND_00.md`：尚未审核的事实状态卡及评价模板。
+- `episodes/EP01/reviews/ROUND_00.md`：早期初始状态卡（历史存档）。
+- `episodes/EP01/reviews/UPSTREAM_PROVENANCE_AUDIT.md`：上游复现与原创能力来源审计。
+- `episodes/EP01/reviews/CREATOR_PRE_REVIEW_R01.md`：内容端定向修订记录；**不是独立审核通过**。
 - `AGENTS.md`：Codex 工作权限与禁止事项。
 
 ## 当前事实状态
 
 - [x] 研究来源初步核查并整理（仍需独立内容审核）
-- [x] EP01 旁白与导演稿草案（**NOT VERIFIED**）
+- [x] EP01 旁白 v1.3 与导演稿 v2.2 内容端修订草案（**独立审核 NOT VERIFIED**）
 - [x] 固定评分尺度与动态性审核规则
 - [x] 创建独立 GitHub 远程仓库并上传首批项目文件
 - [ ] 独立审核导演稿
-- [ ] Codex 本地下载原开源项目并复现原版 Demo
+- [x] Codex 在工程分支重建上游官方 Demo（[PR #3](https://github.com/Kui0s/changrenyan-video/pull/3)，来源审计 PASS；不是原创样片）
 - [ ] 用户确认唯一手绘风格并固定基线
-- [ ] 15秒代码动画样片
+- [ ] [#4](https://github.com/Kui0s/changrenyan-video/issues/4) 15秒**原创**代码动画样片（非上游 Demo）
 - [ ] 样片90分审核及用户放行
 - [ ] 60–68秒成片、90分审核、发布批准
