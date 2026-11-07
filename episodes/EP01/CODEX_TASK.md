@@ -1,6 +1,6 @@
-# Codex 正式任务｜EP01 工程阶段0–2（待执行）
+# Codex 正式任务｜EP01 工程阶段0–2（阶段0已复现，原创样片待放行）
 
-> 当前状态：`PENDING_EXECUTION`。本文是工程任务，不证明 Codex 已经运行命令。
+> 当前状态：上游阶段0的 Sketchbook/Crosshatch 官方 Demo 已在工作分支复现（PR #3）；**用户已选择 Sketchbook**；原创样片和正式全片尚未制作。独立导演审核待完成。现以 `episodes/EP01/ORIGINAL_SAMPLE_TASK.md` 及 Issue #4 作为下一执行任务。
 
 ## 不可省略的阅读
 
@@ -12,7 +12,7 @@
 2. 在 `third_party/` 完整克隆：`https://github.com/cth9191/animate`，记录 commit/remote/license；分析完整 `plugins/animate/skills/animate/` 工作流。
 3. 读取 `styles/sketchbook/` 与 `styles/crosshatch/` 的 `STYLE.md`、`kit.js`、`demo/piece.json`、`demo/src/`，以及共享 `kit/`、`tools/` 的本轮实际依赖；不是只看 README、图片或 prompt。
 4. 按上游 README/SKILL.md 的真实调用方法分别构建、渲染官方 Demo，记录运行命令、日志、MP4、关键帧。失败时输出可复现错误并解决依赖，不能假报成功。
-5. 原版 Demo 通过后提交给用户选定唯一画风。未选定不得声称系列风格已冻结。保留 upstream 原始版本与 diff。
+5. 原版 Demo 已复现，用户确认**Sketchbook**作为唯一系列风格；保留 upstream 原始版本与 diff。**注意：风格已选定 ≠ 由此派生的原创工程代码已经通过验收。**
 
 PowerShell 克隆示例：
 
@@ -22,7 +22,7 @@ git clone https://github.com/cth9191/animate.git .\third_party\animate
 git -C .\third_party\animate rev-parse HEAD
 ```
 
-## 阶段1：导演稿审核通过且风格确定后，建立真实动画工程
+## 阶段1：风格已确定，导演稿审核通过后建立真实原创动画工程
 
 1. 复用已经验证的 `kit.js` 与公共引擎，新增人物步态、髋膝踝关节或等效稳定姿态系统、血液/间隙/肌肉结构和摄取粒子轨迹。
 2. 将摄影机当成有轨迹的实体：位置、跟随对象、缩放与世界空间变换随时间连续变化；不能把图片整体放大冒充镜头进入腿部。
@@ -30,7 +30,7 @@ git -C .\third_party\animate rev-parse HEAD
 4. 按 `DIRECTOR.md` 的信息目标构建。必要时可借鉴 `lemo-opuscar`/`mg-styles-15` 的真实运镜源码；按需要另外克隆，登记来源与许可证，禁止为了省事一口气混装全部系统。
 5. Codex 可以自主优化动作轨迹、缓动、构图、技术实现；涉及科学机制/旁白/重要剧情变更时向 ChatGPT 提议，不得擅改内容。
 
-## 阶段2：15秒样片
+## 阶段2：Sketchbook 风格的15秒原创样片
 
 1. 完成 `SAMPLE_15S.md` 的四段连续动作和临时中文配音、同步字幕及必要音效。
 2. **禁止**：三个静态绘制页面做淡入淡出；单独给每张图做全局scale/position动画；空镜长停留；用字体/颗粒跳动代替人物行动和科学机制。
@@ -48,7 +48,7 @@ git -C .\third_party\animate rev-parse HEAD
 ## 交付格式
 
 ```
-【阶段】0（源码复现） / 1（框架） / 2（样片）
+【阶段】0（上游复现：已完成） / 1（原创框架） / 2（原创样片）
 【版本】upstream commit；工作 commit；MP4 sha256
 【源代码审计】实际读过/运行过的风格、demo、引擎、渲染脚本与版本
 【命令和环境】完整可复现命令、依赖及关键日志
