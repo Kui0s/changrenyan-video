@@ -1,0 +1,31 @@
+{
+  "name": "ep01-original-sample-15s",
+  "title": "EP01 原创15秒技术样片",
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 24,
+    "bpm": 120,
+    "duration": 15,
+    "frames": 360
+  },
+  "storyFormat": "continuous walk-to-muscle mechanism",
+  "style": "sketchbook",
+  "build": [
+    "src/head.html",
+    "kit/core.js",
+    "style",
+    "src/motion-model.js",
+    "src/scenes.js",
+    "src/bridges.js",
+    "kit/morph.js",
+    "kit/board.js",
+    "kit/score-head.js",
+    "src/score.js",
+    "kit/score-tail.js"
+  ],
+  "review": {
+    "safe": { "top": 220, "bottom": 370, "right": 80 },
+    "refs": {}
+  }
+}
