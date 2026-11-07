@@ -1,0 +1,14 @@
+git version 2.52.0.windows.1
+v24.20.0
+11.19.0
+Version 1.65.0
+ffmpeg version 6.1.1-essentials_build-www.gyan.dev Copyright (c) 2000-2023 the FFmpeg developers
+ffprobe version 4.0.2 Copyright (c) 2007-2018 the FFmpeg developers
+os=Microsoft Windows NT 10.0.26200.0
+upstream_commit=7e5eb56feb2dd573f890e1b7b34748af43d58263
+playwright_browsers_path=E:\codex\small_tasks\changrenyan-video\.tools\ffmpeg\browsers
+font=C:/Windows/Fonts/Inkfree.ttf sha256=c8ab96bc49ec1dc36936b5973fc143ca222c1a33ab27b87071a3bbc44d34ca9a
+font=C:/Windows/Fonts/segoepr.ttf sha256=91046862e08fbade0bdd648e81c4efbe6a963947f8b6e32b64a28fe39073c468
+font=C:/Windows/Fonts/segoeprb.ttf sha256=3cced0162ddb9e5f1e63ee1b36fd6e581c090318dce1a0af01b77f5ea9952c80
+font=C:/Windows/Fonts/consola.ttf sha256=cf00b507b3286870cc5064ebd0633c303f70b491a4af25eec2d32df413db0179
+font=C:/Windows/Fonts/consolab.ttf sha256=7e8de70c92a891722bd3fbd623db005caab2bfe267e5dab5be46b95a44e0c7f1
