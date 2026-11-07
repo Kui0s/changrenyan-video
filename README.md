@@ -1,8 +1,8 @@
 # 常人言｜代码动画短视频系列
 
-> 项目状态：**Sketchbook 风格已确认，上游官方 Demo 复现通过；ROUND 01/02 导演审核均未获正式PASS（ROUND 02文字诊断86.0），待继续整改/独立复评。用户已决定配音留到后期、成片≤120秒。原创15秒样片和全片均尚未制作。**
+> 项目状态：**Sketchbook 风格已确认，上游官方 Demo 复现通过；ROUND 01/02 导演审核均未获正式PASS（ROUND 02文字诊断86.0），已完成文字定向返工 v1.5/v2.4，待 ROUND 03 独立复评。用户已决定配音留到后期、成片≤120秒。原创15秒样片和全片均尚未制作。**
 >
-> 当前基线：`SCORE_RUBRIC v1.0`（固定计分标准），`AUDIT_CHECKLIST v1.0`（可逐轮细化的检查项）。
+> 当前基线：`SCORE_RUBRIC v1.0`（固定计分标准），`AUDIT_CHECKLIST v1.1`（可逐轮细化的检查项）。
 
 ## 目标
 
@@ -47,6 +47,7 @@
 - `episodes/EP01/reviews/ROUND_01.md`：首轮独立导演审核，**REVISE/NO_GO**（历史诊断79.3）。
 - `episodes/EP01/reviews/ROUND_02.md`：二轮独立导演审核，**REVISE/NO_GO**（历史诊断86.0）；历史证据要求不追溯改写。
 - `episodes/EP01/reviews/CREATOR_REVISION_R02.md`：针对ROUND 01的逐项整改记录；**不是独立审核**。
+- `episodes/EP01/reviews/CREATOR_REVISION_R03.md`：针对ROUND 02的定向返工记录，口播与导演稿已升至 v1.5/v2.4；**不是独立审核**。
 - `episodes/EP01/VOICE_TIMING_PROBE_R02.md`：历史低保真eSpeak测时；**只作为参考，不再阻塞导演文字审核；后期成片再验正式声音**。
 - `AGENTS.md`：Codex 工作权限与禁止事项。
 
