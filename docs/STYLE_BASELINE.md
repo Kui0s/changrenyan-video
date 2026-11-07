@@ -1,25 +1,34 @@
-# 系列风格基线（待确认）
+# 《常人言》系列视觉风格基线｜候选已复现，正式选定待确认
 
-## 约束
+## 当前可核验状态（2026-11-06）
 
-画风必须**唯一而统一**；每期镜头、分镜、动作、转场自由设计。优先使用真实 GitHub 风格源代码、Demo、绘图库与渲染工具，不拿截图当作重画依据。
+- 上游：`https://github.com/cth9191/animate`
+- 上游固定 commit：`7e5eb56feb2dd573f890e1b7b34748af43d58263`
+- 来源许可：MIT（本次只确认上游自身；移植时仍须保留版权/许可正文，独立补充依赖清单）
+- Demo 复现工作分支：`codex/ep01-upstream-reproduction`，提交 `095ec71eda99940cae1ac008610065d32a84ec4f`，Draft PR #3
+- 已交付：`sketchbook` 与 `crosshatch` 两份6秒官方 Demo 的本地源码重新构建、MP4、帧序列和日志
+- 经既有独立来源审计：**上游 Demo 复现 PASS；《常人言》原创场景能力 NOT VERIFIED；跨干净环境重建 NOT VERIFIED**
+- 用户明确反馈 Demo 动态效果好、两种风格表现可接受，但尚**未唯一指定**最终系列画风
+- `selected_style: PENDING_USER_CHOICE`
+- `original_sample_baseline: NOT_CREATED`
 
-目前可先复现：
-- `cth9191/animate` 的 `styles/sketchbook/`
-- `cth9191/animate` 的 `styles/crosshatch/`
+## 风格选择建议（创作端建议，不替用户拍板）
 
-**尚未经过用户观看真实源码生成视频之后确认最终风格。** 不得写“sketchbook 已定稿”。当前只是候选技术路线。
+**优先推荐 Sketchbook**：原 `STYLE.md` 提供暖色纸张、铅笔/石墨线条、逐笔绘制、单色强调、沿同一张纸移动的摄像机；与《常人言》的饭桌→人物→人体机制→生活闭环叙事相容，也有已验的绘图/书写 API。
 
-## 冻结基线应记录（实际复现后填写）
+**Crosshatch**：交叉排线和纹理更强，适合强烈明暗反差；其演示中的明纸面→深色机器世界是原 Demo 的具体叙事技法，不应硬搬到饭后散步的机制解释里。高密度排线可能提高手机端微观示意的认读成本，这一风险需在原创样片里实测，不能凭风格说明断言失败。
 
-- selected_style: `PENDING_USER_CHOICE`
-- upstream_repo: `https://github.com/cth9191/animate`
-- upstream_commit: `NOT_VERIFIED`
-- source paths: `plugins/animate/skills/animate/styles/<chosen>/STYLE.md`, `kit.js`, `demo/`, `kit/`, `tools/`
-- verified_demo_render: `NOT_VERIFIED`
-- source_license: `MIT`（需复核依赖与素材）
-- baseline_commit: `NOT_CREATED`
-- measured attributes: 线条/纹理/配色/背景/人物比例/手写字体/12fps或其他作画节奏/摄影运动；由原源码与实片提取，不凭截图填数值。
-- acceptance: 用户确认后冻结，不为每期内容自行更换视觉体系。
+**选择依据**：两套上游 `STYLE.md`、真实复现 Demo 和《常人言》第一期叙事目标。默认推荐不构成用户确认，不能擅自把两套混合成第三种不稳定风格。
 
-版本升级方式：提PR/比较同一标准测试场景前后效果，跨镜头回归通过后用户确认。其他项目的镜头算法可以择需借鉴，但不能将其不同画风一并混入最终系列。
+## 选定后必须冻结的工程记录
+
+- `selected_style`、所选 `STYLE.md`、`kit.js`、上游 `kit/`、`tools/` 及真实依赖路径。
+- `upstream_commit`、`baseline_commit`、成功重建脚本和媒体哈希。
+- 固定线条、纹理、色调、人物造型、字体回退和帧节奏（原系统 2-frame boil），手机端实际阅读效果；**不能只保存文字提示词**。
+- 合法引用所需的 MIT 版权/许可文件与独立依赖清单，必要时提交第三方 NOTICE。
+- 以人物迈步、内部组织示意和中文标签制作的 **原创回归测试片段**，并保留跨镜头/跨集对比。
+- 镜头、转场、动作技法可随内容多变；**不锁死导演手法**。风格变更必须单独说明并经用户批准。
+
+## 原创能力验证
+
+两个上游官方 Demo 只能证明复现环境及工具链。下一步必须满足 `episodes/EP01/ORIGINAL_SAMPLE_TASK.md`：新角色步态、镜头进入腿部、新血管/组织间隙/肌细胞示意，新增 scenes 源码、diff、MP4、连续帧和独立审查。此项未通过前，不得宣称系列风格工程已经能稳定原创出片。
