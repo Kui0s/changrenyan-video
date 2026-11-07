@@ -11,6 +11,6 @@ upstream_clean=true
 playwright_version=Version 1.65.0
 playwright_browser_revisions=.links,chromium_headless_shell-1254,chromium-1254,ffmpeg-1013,winldd-1007
 playwright_browsers_path=C:\Users\COLORFUL\Documents\Codex\2026-11-06\https-github-com-kui0s-changrenyan-video-2\work\changrenyan-video\.tools\browsers
-source_commit=d003134a14257a50aa1a166f0df34aebf7fa8ac6
+source_commit=b086858d46050888b2435eb965338a8b972f6620
 font=C:/Windows/Fonts/simkai.ttf sha256=95b3e69321f4e55f6ecf36b29d1e31a0c1205acfde0117df6472a17494c3cbd2
 font=C:/Windows/Fonts/msyh.ttc sha256=d79c55e68b1131eea0cc1c47be4f572d964f28c682e143db2ad09c1e4cb07a3f

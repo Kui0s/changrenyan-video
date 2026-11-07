@@ -4,8 +4,8 @@ Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\Users\COLORFUL\Documents\Codex\2026-
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Duration: 00:00:15.00, start: 0.000000, bitrate: 5828 kb/s
-  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920, 5724 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
+  Duration: 00:00:15.00, start: 0.000000, bitrate: 5901 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1080x1920, 5797 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
     Metadata:
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
@@ -28,9 +28,9 @@ Output #0, null, to 'NUL':
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
       encoder         : Lavc60.31.102 wrapped_avframe
-[freezedetect @ 000001cf7e564f80] lavfi.freezedetect.freeze_start: 13.25
-[freezedetect @ 000001cf7e564f80] lavfi.freezedetect.freeze_duration: 0.5
-[freezedetect @ 000001cf7e564f80] lavfi.freezedetect.freeze_end: 13.75
-[freezedetect @ 000001cf7e564f80] lavfi.freezedetect.freeze_start: 13.75
-[out#0/null @ 000001cf7c75a380] video:169kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
-frame=  360 fps=0.0 q=-0.0 Lsize=N/A time=00:00:14.95 bitrate=N/A speed=22.7x
+[freezedetect @ 0000020a544b4800] lavfi.freezedetect.freeze_start: 13.25
+[freezedetect @ 0000020a544b4800] lavfi.freezedetect.freeze_duration: 0.5
+[freezedetect @ 0000020a544b4800] lavfi.freezedetect.freeze_end: 13.75
+[freezedetect @ 0000020a544b4800] lavfi.freezedetect.freeze_start: 13.75
+[out#0/null @ 0000020a522d2140] video:169kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+frame=  360 fps=0.0 q=-0.0 Lsize=N/A time=00:00:14.95 bitrate=N/A speed=24.6x
