@@ -1,6 +1,6 @@
 # 常人言｜代码动画短视频系列
 
-> 项目状态：**已完成两套官方 Demo 源码复现（PR #3，仅在工程分支）；EP01 原创样片和完整成片尚未制作，导演稿独立审核与用户唯一风格选择待完成。**
+> 项目状态：**已完成两套官方 Demo 源码复现（PR #3，仅在工程分支）；EP01 原创样片和完整成片尚未制作，导演稿独立审核待完成；用户已选定 Sketchbook 唯一系列画风。**
 >
 > 当前基线：`SCORE_RUBRIC v1.0`（固定计分标准），`AUDIT_CHECKLIST v1.0`（可逐轮细化的检查项）。
 
@@ -32,7 +32,7 @@
 - `docs/SCORE_RUBRIC.md`：固定的100分评分维度、权重、门槛与硬性否决。
 - `docs/AUDIT_CHECKLIST.md`：会随实物缺陷增加的检查项；不得改变评分尺度。
 - `docs/MOTION_REQUIREMENTS.md`：避免“幻灯片视频”的工程约束及可执行测试。
-- `docs/STYLE_BASELINE.md`：上游 Demo 已复现，包含 Sketchbook 推荐及尚待用户确定的唯一正式风格。
+- `docs/STYLE_BASELINE.md`：用户已批准 Sketchbook 唯一系列画风；原创派生工程基线仍待样片验证。
 - `docs/UPSTREAM_SOURCES.md`：GitHub 源码来源、路径、可复现要求及许可证。
 - `episodes/EP01/RESEARCH.md`：科学证据与禁用论点。
 - `episodes/EP01/SCRIPT.md`：口播文案。
@@ -53,7 +53,7 @@
 - [x] 创建独立 GitHub 远程仓库并上传首批项目文件
 - [ ] 独立审核导演稿
 - [x] Codex 在工程分支重建上游官方 Demo（[PR #3](https://github.com/Kui0s/changrenyan-video/pull/3)，来源审计 PASS；不是原创样片）
-- [ ] 用户确认唯一手绘风格并固定基线
+- [x] 用户确认 Sketchbook 为唯一系列手绘画风（源码上游 commit 已记录；**原创派生工程基线尚待验证**）
 - [ ] [#4](https://github.com/Kui0s/changrenyan-video/issues/4) 15秒**原创**代码动画样片（非上游 Demo）
 - [ ] 样片90分审核及用户放行
 - [ ] 60–68秒成片、90分审核、发布批准
