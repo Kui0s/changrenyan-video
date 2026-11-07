@@ -1,34 +1,45 @@
-# 《常人言》系列视觉风格基线｜候选已复现，正式选定待确认
+# 《常人言》系列视觉风格基线｜Sketchbook 正式选定
 
-## 当前可核验状态（2026-11-06）
+> **用户决定（2026-11-06）：固定采用 Sketchbook。** 这是系列**风格路线已经确认**，不是声称原创动画的工程基线已验收。镜头、动作、转场、叙事结构仍允许随每期内容变化。
 
-- 上游：`https://github.com/cth9191/animate`
+## 冻结的风格来源与身份
+
+- `selected_style: sketchbook`（**USER_APPROVED**）
+- 上游仓库：`https://github.com/cth9191/animate`
 - 上游固定 commit：`7e5eb56feb2dd573f890e1b7b34748af43d58263`
-- 来源许可：MIT（本次只确认上游自身；移植时仍须保留版权/许可正文，独立补充依赖清单）
-- Demo 复现工作分支：`codex/ep01-upstream-reproduction`，提交 `095ec71eda99940cae1ac008610065d32a84ec4f`，Draft PR #3
-- 已交付：`sketchbook` 与 `crosshatch` 两份6秒官方 Demo 的本地源码重新构建、MP4、帧序列和日志
-- 经既有独立来源审计：**上游 Demo 复现 PASS；《常人言》原创场景能力 NOT VERIFIED；跨干净环境重建 NOT VERIFIED**
-- 用户明确反馈 Demo 动态效果好、两种风格表现可接受，但尚**未唯一指定**最终系列画风
-- `selected_style: PENDING_USER_CHOICE`
-- `original_sample_baseline: NOT_CREATED`
+- 风格规范：`plugins/animate/skills/animate/styles/sketchbook/STYLE.md`
+- 风格绘图代码：`plugins/animate/skills/animate/styles/sketchbook/kit.js`
+- 官方示例及源码：`plugins/animate/skills/animate/styles/sketchbook/demo/`
+- 共用引擎和工具：`plugins/animate/skills/animate/kit/`、`plugins/animate/skills/animate/tools/`（以真实依赖为准）
+- 上游源码许可：MIT；正式改编、再分发须保留其版权和 LICENSE，另行登记第三方依赖和媒体权利
+- 官方 Demo 复现提交：`095ec71eda99940cae1ac008610065d32a84ec4f`（`codex/ep01-upstream-reproduction`，Draft PR #3）
+- `upstream_demo_reproduction: PASS`（已有来源审计证据）
+- `original_episode_animation: NOT_VERIFIED`
+- `series_derived_engine_baseline_commit: NOT_CREATED`
+- `clean_environment_rebuild: NOT_VERIFIED`
 
-## 风格选择建议（创作端建议，不替用户拍板）
+## 固定的风格特征
 
-**优先推荐 Sketchbook**：原 `STYLE.md` 提供暖色纸张、铅笔/石墨线条、逐笔绘制、单色强调、沿同一张纸移动的摄像机；与《常人言》的饭桌→人物→人体机制→生活闭环叙事相容，也有已验的绘图/书写 API。
+这些特征来自上游真实 Sketchbook `STYLE.md`，要求 Codex 优先通过上游源码函数实现，而不是拿截图重新描绘：
 
-**Crosshatch**：交叉排线和纹理更强，适合强烈明暗反差；其演示中的明纸面→深色机器世界是原 Demo 的具体叙事技法，不应硬搬到饭后散步的机制解释里。高密度排线可能提高手机端微观示意的认读成本，这一风险需在原创样片里实测，不能凭风格说明断言失败。
+1. **介质**：温暖的速写本纸张、石墨与墨线、少量橘陶土色重点、微弱纸张纹理；构图保留纸面呼吸感。
+2. **线条**：`gpencil` / `gline` 等真实笔触 API；不规则双描、铅笔写入、墨线定形、涂鸦填色、刻线排阴影。
+3. **帧风格**：原版每两帧变化的笔触 boil，保持手绘生命感，但不得把线条抖动当作人物动作。
+4. **文字**：手写视觉语言，适应简体中文的字体需真实测量并确认许可及手机可读性；不能因本机缺字造成回退失真。
+5. **人物**：同一片中保持统一的造型、比例、线条与强调色；在真实 kit 基础上新增人物步态和人体示意，不拿上游灯泡变太阳的示例分镜来替换文本。
+6. **摄影**：保留“纸面是世界”的视觉连续性，但具体镜头调度、形变、节奏、场景转接**不固化为模板**。
+7. **机制图解**：人体内部属于同一手绘视觉体系，禁止突然切换成另一套高光3D或平面UI图标画风。允许为了阅读性简化纹理。
 
-**选择依据**：两套上游 `STYLE.md`、真实复现 Demo 和《常人言》第一期叙事目标。默认推荐不构成用户确认，不能擅自把两套混合成第三种不稳定风格。
+## 不再采用的备选方案
 
-## 选定后必须冻结的工程记录
+`crosshatch` 仍作为已复现的**历史技术参考**保存在 PR #3；不得与 Sketchbook 画风混用并宣称仍是同一系列视觉风格。今后若需要更换系列画风，必须先提出专门变更并取得用户批准。
 
-- `selected_style`、所选 `STYLE.md`、`kit.js`、上游 `kit/`、`tools/` 及真实依赖路径。
-- `upstream_commit`、`baseline_commit`、成功重建脚本和媒体哈希。
-- 固定线条、纹理、色调、人物造型、字体回退和帧节奏（原系统 2-frame boil），手机端实际阅读效果；**不能只保存文字提示词**。
-- 合法引用所需的 MIT 版权/许可文件与独立依赖清单，必要时提交第三方 NOTICE。
-- 以人物迈步、内部组织示意和中文标签制作的 **原创回归测试片段**，并保留跨镜头/跨集对比。
-- 镜头、转场、动作技法可随内容多变；**不锁死导演手法**。风格变更必须单独说明并经用户批准。
+## 尚需 Codex 完成的工程工作
 
-## 原创能力验证
+- 在独立原创样片工程中，使用固定上游版本的 Sketchbook `kit.js`、共用引擎和可复现工具链。
+- 原样保留上游副本，新增 EP01 人物、步态、镜头及微观机制场景代码，清楚登记继承/修改/原创的代码边界。
+- 输出约15秒原创动画、连续帧、源码 diff、运行命令、哈希、完整许可证记录。
+- 源码和视觉**正式工程基线**只有在原创样片独立审核合格、用户验收后，才能记录为稳定的 `series_derived_engine_baseline_commit`；不能仅凭官方 Demo 的成功来冻结改造后的代码。
+- 独立导演稿审核仍未通过（`NOT_VERIFIED`），不得把风格确认理解成导演或样片自动放行。
 
-两个上游官方 Demo 只能证明复现环境及工具链。下一步必须满足 `episodes/EP01/ORIGINAL_SAMPLE_TASK.md`：新角色步态、镜头进入腿部、新血管/组织间隙/肌细胞示意，新增 scenes 源码、diff、MP4、连续帧和独立审查。此项未通过前，不得宣称系列风格工程已经能稳定原创出片。
+后续参见 `episodes/EP01/ORIGINAL_SAMPLE_TASK.md` 与 [Issue #4](https://github.com/Kui0s/changrenyan-video/issues/4)。
