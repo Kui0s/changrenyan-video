@@ -1,5 +1,13 @@
 # 动画制作方法研究室｜研究导航与真实进度（2026-11-08）
 
+## 最新状态：R01五项定向整改已提交，待独立R02复审
+
+- 研究审核R01在主分支`docs/animation-lab/reviews/METHOD_TRANSFER_AUDIT_R01.md`：**源码研究VERIFIED WITH LIMITS，流程REVISE，A/B/C实物NOT VERIFIED**。研究主分支没有变成已批准的生产标准。
+- 本研究分支已经将五项意见落实到`PRODUCTION_METHOD_V1.md`、`METHOD_PROOF_TASK.md`、`INDEPENDENT_VISUAL_REVIEW_PROTOCOL_V1.md`、`SCIENCE_VISUALS_TRANSFER_V1.md`。
+- **[R01创作端逐项整改记录](reviews/METHOD_TRANSFER_R01_RESPONSE.md)**：每项对应修改位置、待复审证据和readcheck能力的纠偏；**只是作者答复，不是独立R02结论**。
+- A形状变形、B-space人体空间、B-mechanism医学机制、C临时普通话及Canvas字幕，**尚无实际新视频**；不能把文字修订说成能力通过。
+- 用户保留正式中文配音在剪映或自行录制后期加入的权利；正式成片才必须有完整可听中文声轨。
+
 ## 研究目标
 
 让《常人言》从当前“文本导演评分高、工程测试通过、真实视频极差”变为可重复制作达到用户认可观感的原创动画。对照研究`cth9191/animate`的**整个成片工作流**，不再以绘图函数或官方Demo复现成功冒充原创制作能力。
@@ -19,7 +27,7 @@
 3. **[SCIENCE_VISUALS_TRANSFER_V1.md](SCIENCE_VISUALS_TRANSFER_V1.md)** — 形状morph、世界相机与真实人体尺度深入的区别；2D、分层素材、2.5D/3D的可行路线。
 4. **[INDEPENDENT_VISUAL_REVIEW_PROTOCOL_V1.md](INDEPENDENT_VISUAL_REVIEW_PROTOCOL_V1.md)** — 先盲看真实视频、再核对导演与源码、不同上下文双审、原90分标准不变。
 5. **[UPSTREAM_METHODS_AUDIT_V1.md](UPSTREAM_METHODS_AUDIT_V1.md)** — 上一版具体上游函数与失败EP01场景对比。
-6. **[METHOD_PROOF_TASK.md](METHOD_PROOF_TASK.md)** — **尚未执行**的三个可验证实验：A原创形状morph、B人体内部真实尺度深入、C普通话音画同步。
+6. **[METHOD_PROOF_TASK.md](METHOD_PROOF_TASK.md)** — **尚未执行**的三个可验证实验：A原创形状morph、B-space空间与B-mechanism科学解释分审、C临时普通话时序/真实Canvas字幕与反例测试。
 
 ## 三个关键能力的证据状态
 
