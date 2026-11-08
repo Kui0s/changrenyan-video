@@ -54,6 +54,10 @@ if ($actualCommit -ne $upstreamCommit) { throw "upstream commit mismatch: $actua
 
 Push-Location $repoRoot
 try {
+    $sourceCommit = (git rev-parse HEAD).Trim()
+    Assert-NativeSuccess "read source commit"
+    $renderCommitFile = Join-Path $pieceRoot "renders/render-source-commit.txt"
+
     if (-not $SkipInstall) {
         npm ci --no-audit --no-fund 2>&1 | Tee-Object -FilePath (Join-Path $logRoot "npm-ci.log")
         Assert-NativeSuccess "npm ci"
@@ -82,6 +86,15 @@ try {
         node (Join-Path $skillRoot "tools/export.mjs") $pieceRoot --workers 4 --share 2>&1 |
             Tee-Object -FilePath (Join-Path $logRoot "export.log")
         Assert-NativeSuccess "export full film"
+        $sourceCommit | Set-Content -LiteralPath $renderCommitFile -Encoding utf8NoBOM
+    } else {
+        if (-not (Test-Path -LiteralPath $renderCommitFile)) {
+            throw "rendered master has no render-source-commit.txt; run without -SkipRender"
+        }
+        $renderedSourceCommit = (Get-Content -LiteralPath $renderCommitFile -Raw).Trim()
+        if ($renderedSourceCommit -ne $sourceCommit) {
+            throw "rendered master belongs to $renderedSourceCommit, not current source $sourceCommit; run without -SkipRender"
+        }
     }
 
     $sourceVideo = Join-Path $pieceRoot "renders/final.mp4"
@@ -149,8 +162,6 @@ try {
 
     $fontFiles = @("C:/Windows/Fonts/simkai.ttf", "C:/Windows/Fonts/msyh.ttc") | Where-Object { Test-Path -LiteralPath $_ }
     if ($fontFiles.Count -eq 0) { throw "no approved Simplified Chinese font is installed" }
-    $sourceCommit = (git rev-parse HEAD).Trim()
-    Assert-NativeSuccess "read source commit"
     $environment = @(
         (git --version), (node --version), (npm --version), (pwsh --version),
         (& $ffmpegPath -version | Select-Object -First 1),

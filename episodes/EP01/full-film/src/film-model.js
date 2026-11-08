@@ -94,6 +94,64 @@
     return { personId: 'person_01', targetId: 'right_gluteus_medius', depth };
   }
 
+  function anchorContinuityAt() {
+    const person = Object.freeze({
+      id: 'person_01',
+      gaitTime: 9,
+      x: 520,
+      groundY: 1325,
+      scale: 1.05,
+    });
+    const gait = walkerState(person.gaitTime);
+    const pelvisY = person.groundY + (gait.hipY - gait.groundY) * person.scale - 46 * person.scale;
+    return {
+      person,
+      rightGlute: Object.freeze([
+        person.x + 43 * person.scale,
+        pelvisY + 8 * person.scale,
+      ]),
+    };
+  }
+
+  function scaleLayerState(time) {
+    const continuity = anchorContinuityAt(time);
+    const anchors = Object.freeze({
+      rightGlute: continuity.rightGlute,
+      pelvisStart: continuity.rightGlute,
+      pelvisGlute: Object.freeze([630, 905]),
+      fascicleStart: Object.freeze([630, 905]),
+      fascicleCapillary: Object.freeze([560, 835]),
+      microStart: Object.freeze([560, 835]),
+      microCenter: Object.freeze([540, 930]),
+    });
+    const forward = time <= 66;
+    let personAlpha;
+    let pelvisAlpha;
+    let fascicleAlpha;
+    let microAlpha;
+    if (forward) {
+      personAlpha = 1 - 0.85 * smooth((time - 45) / 4);
+      pelvisAlpha = smooth((time - 41) / 4) * (1 - 0.8 * smooth((time - 50) / 4));
+      fascicleAlpha = smooth((time - 45) / 4) * (1 - 0.8 * smooth((time - 56) / 4));
+      microAlpha = smooth((time - 50) / 6);
+    } else {
+      microAlpha = 1 - 0.85 * smooth((time - 66) / 4);
+      fascicleAlpha = 0.2 + 0.8 * smooth((time - 66) / 4) * (1 - smooth((time - 70) / 4));
+      pelvisAlpha = 0.2 + 0.8 * smooth((time - 70) / 4) * (1 - smooth((time - 74) / 4));
+      personAlpha = 0.15 + 0.85 * smooth((time - 74) / 3);
+    }
+    return {
+      person: continuity.person,
+      anchors,
+      layers: [
+        { id: 'person', alpha: personAlpha, progress: 1 },
+        { id: 'pelvis', alpha: pelvisAlpha, progress: smooth((time - 41) / 4) },
+        { id: 'fascicle', alpha: fascicleAlpha, progress: smooth((time - 45) / 5) },
+        { id: 'micro', alpha: microAlpha, progress: smooth((time - 50) / 6) },
+      ],
+    };
+  }
+
   const GLUCOSE_STOPS = Object.freeze([
     { t: 51, region: 'blood', progress: 0 },
     { t: 55, region: 'capillary-wall', progress: 0.25 },
@@ -128,6 +186,8 @@
     characterPose,
     walkerState,
     scaleJourneyAt,
+    anchorContinuityAt,
+    scaleLayerState,
     glucoseState,
     GLUCOSE_STOPS,
     ambientMotionAt,

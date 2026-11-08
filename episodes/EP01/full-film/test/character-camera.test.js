@@ -8,6 +8,8 @@ const {
   scaleJourneyAt,
   glucoseState,
   ambientMotionAt,
+  anchorContinuityAt,
+  scaleLayerState,
 } = require('../src/film-model.js');
 
 test('person_01 has adult proportions, connected body volumes, and visible shoes', () => {
@@ -60,6 +62,37 @@ test('macro-to-micro camera uses the reviewed right gluteus chain and returns to
   assert.equal(samples[0].personId, 'person_01');
   assert.equal(samples.at(-1).personId, 'person_01');
   assert.ok(samples.every((sample) => sample.targetId === 'right_gluteus_medius'));
+});
+
+test('scene 04 last frame and scene 05 first frame share the same P0 person and right-glute anchor', () => {
+  const end04 = anchorContinuityAt(41 - 1 / 24);
+  const start05 = anchorContinuityAt(41);
+
+  assert.equal(end04.person.id, 'person_01');
+  assert.deepEqual(start05.person, end04.person);
+  assert.deepEqual(start05.rightGlute, end04.rightGlute);
+});
+
+test('each scale unlock preserves a visible parent layer and a shared child origin', () => {
+  const transitions = [43, 47, 53].map(scaleLayerState);
+  for (const state of transitions) {
+    assert.ok(state.layers.filter((layer) => layer.alpha >= 0.12).length >= 2);
+  }
+
+  const chain = scaleLayerState(53).anchors;
+  assert.deepEqual(chain.pelvisStart, chain.rightGlute);
+  assert.deepEqual(chain.fascicleStart, chain.pelvisGlute);
+  assert.deepEqual(chain.microStart, chain.fascicleCapillary);
+});
+
+test('scene 06 inherits the scene 05 terminal micro geometry before pulling back', () => {
+  const end05 = scaleLayerState(66 - 1 / 24);
+  const start06 = scaleLayerState(66);
+
+  assert.deepEqual(start06.anchors, end05.anchors);
+  assert.ok(end05.layers.find((layer) => layer.id === 'micro').alpha >= 0.99);
+  assert.ok(start06.layers.find((layer) => layer.id === 'micro').alpha >= 0.99);
+  assert.equal(glucoseState(66).region, 'muscle-cell');
 });
 
 test('glucose crosses the two distinct biological boundaries in order and is not reversed on camera exit', () => {

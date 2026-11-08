@@ -1,5 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const {
   FILM,
@@ -81,4 +83,10 @@ test('dense mechanism subtitles use a narrower phone-safe measure', () => {
   assert.ok(subtitleFontSize('06') <= 32);
   assert.ok(subtitleCharactersPerLine('05') <= 19);
   assert.ok(subtitleCharactersPerLine('06') <= 19);
+});
+
+test('skip-render delivery requires a render sidecar matching the current source commit', () => {
+  const script = fs.readFileSync(path.resolve(__dirname, '../../../../scripts/build-ep01-full-film.ps1'), 'utf8');
+  assert.match(script, /render-source-commit\.txt/u);
+  assert.match(script, /rendered master belongs to .* current source/u);
 });

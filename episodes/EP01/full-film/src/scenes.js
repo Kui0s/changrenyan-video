@@ -235,8 +235,9 @@ function drawBloodTarget(scene) {
   const t = localTime(scene);
   const person = drawWholeBody(scene, true);
   const route = [[385, 1030], [455, 970], [520, 1005], [person.rightGlute[0], person.rightGlute[1]]];
+  const routeAlpha = lerp(0.82, 0.18, ease01((t - 5.5) / 1.2));
   ctx.save(); ctx.setLineDash([16, 13]);
-  gpencil(route, { key: 'blood-route', w: 10, col: '#b65b51', a: 0.82, part: ease01(t / 5.2), passes: 1 });
+  gpencil(route, { key: 'blood-route', w: 10, col: '#b65b51', a: routeAlpha, part: ease01(t / 5.2), passes: 1 });
   ctx.restore();
   const flow = ease01(t / 5.2);
   const seg = Math.min(route.length - 2, Math.floor(flow * (route.length - 1)));
@@ -244,8 +245,9 @@ function drawBloodTarget(scene) {
   const px = lerp(route[seg][0], route[seg + 1][0], u);
   const py = lerp(route[seg][1], route[seg + 1][1], u);
   const dot = loopPts(px, py, 20, 20, 0.08, 0, 20);
-  scribbleFill(dot, SK.hilite, { key: 'blood-glucose', gap: 6, w: 4, a: 1, base: 0.45 });
-  gline(dot, { key: 'blood-glucose-line', w: 4, closed: true });
+  const dotAlpha = 1 - ease01((t - 5.5) / 1.2);
+  scribbleFill(dot, SK.hilite, { key: 'blood-glucose', gap: 6, w: 4, a: dotAlpha, base: 0.45 });
+  gline(dot, { key: 'blood-glucose-line', w: 4, closed: true, a: dotAlpha });
   handLetter('血液运输', 310, 900, 43, { col: SK.terraD, align: 'center', reveal: ease01(t / 0.8), key: 'blood-label', jit: 0.4 });
   const lock = ease01((t - 5.5) / 1.2);
   const ring = loopPts(person.rightGlute[0], person.rightGlute[1], 78, 88, 0.04, 0, 40);
@@ -264,7 +266,7 @@ function drawBreadcrumb(active) {
   });
 }
 
-function drawMicroDiagram(globalTime, alpha = 1) {
+function drawMicroDiagram(globalTime, alpha = 1, showLabels = true) {
   const glucose = FM.glucoseState(globalTime);
   const ambient = FM.ambientMotionAt('05', globalTime);
   const vessel = sketchBox(110, 610, 300, 640, 80, 0.025);
@@ -297,13 +299,31 @@ function drawMicroDiagram(globalTime, alpha = 1) {
   const dot = loopPts(x, y, 23, 23, 0.08, 0, 22);
   scribbleFill(dot, SK.hilite, { key: 'micro-glucose-fill', gap: 6, w: 4, a: alpha, base: 0.4 });
   gline(dot, { key: 'micro-glucose-line', w: 4.5, col: SK.ink, closed: true, a: alpha });
-  const labels = [['血液', 250], ['毛细血管壁', 390], ['组织间隙', 540], ['肌细胞膜', 690], ['细胞内', FT.VISUAL_LAYOUT.microCellLabelX]];
-  labels.forEach(([label, lx], index) => handLetter(label, lx, FT.VISUAL_LAYOUT.microLabelsY, index === 1 || index === 3 ? 29 : 33, { col: index === 1 || index === 3 ? SK.terraD : SK.graph, align: 'center', reveal: alpha, key: 'micro-label-' + index, jit: 0.3 }));
+  if (showLabels) {
+    const labels = [['血液', 250], ['毛细血管壁', 390], ['组织间隙', 540], ['肌细胞膜', 690], ['细胞内', FT.VISUAL_LAYOUT.microCellLabelX]];
+    labels.forEach(([label, lx], index) => handLetter(label, lx, FT.VISUAL_LAYOUT.microLabelsY, index === 1 || index === 3 ? 29 : 33, { col: index === 1 || index === 3 ? SK.terraD : SK.graph, align: 'center', reveal: alpha, key: 'micro-label-' + index, jit: 0.3 }));
+  }
+}
+
+function drawAnchoredLayer(layer, startAnchor, targetAnchor, draw) {
+  if (layer.alpha <= 0.01 || layer.progress <= 0.001) return;
+  const scale = lerp(0.08, 1, layer.progress);
+  const origin = [lerp(startAnchor[0], targetAnchor[0], layer.progress), lerp(startAnchor[1], targetAnchor[1], layer.progress)];
+  ctx.save();
+  ctx.globalAlpha *= layer.alpha;
+  ctx.translate(origin[0], origin[1]);
+  ctx.scale(scale, scale);
+  ctx.translate(-targetAnchor[0], -targetAnchor[1]);
+  draw();
+  ctx.restore();
 }
 
 function drawScaleJourney(scene, exiting = false) {
   const global = TT;
   const state = FM.scaleJourneyAt(global);
+  const continuity = FM.scaleLayerState(global);
+  const layer = Object.fromEntries(continuity.layers.map((item) => [item.id, item]));
+  const activeLayer = continuity.layers.reduce((best, item) => (item.alpha > best.alpha ? item : best)).id;
   const depth = state.depth;
   const active = Math.min(5, Math.max(0, Math.floor(depth + 0.2)));
   drawBreadcrumb(active);
@@ -313,30 +333,40 @@ function drawScaleJourney(scene, exiting = false) {
     const ring = loopPts(center[0], center[1], ringRadius + i * 45, ringRadius * 0.72 + i * 32, 0.025, 0, 46);
     gline(ring, { key: 'zoom-ring-' + i, w: 3.5, col: i === 0 ? SK.terraD : SK.graphL, closed: true, a: 0.2 + (3 - i) * 0.1 });
   }
-  if (depth < 1.25) {
-    drawAdult(localTime(scene), 540, 1370, 0.9, { transparent: true, muscles: true });
+  if (layer.person.alpha > 0.01) {
+    ctx.save(); ctx.globalAlpha *= layer.person.alpha;
+    drawAdult(continuity.person.gaitTime, continuity.person.x, continuity.person.groundY, continuity.person.scale, { transparent: true, muscles: true });
+    const handoff = 1 - ease01((global - 41) / 1.2);
+    const ring = loopPts(continuity.anchors.rightGlute[0], continuity.anchors.rightGlute[1], 78, 88, 0.04, 0, 40);
+    gline(ring, { key: 'handoff-target-lock', w: 7, col: SK.hiliteD, closed: true, a: handoff });
+    ctx.restore();
+  }
+  if (activeLayer === 'person') {
     handLetter('同一个人 · 同一个右髋锚点', 540, 1260, 38, { col: SK.graph, align: 'center', reveal: 1, key: 'same-person', jit: 0.35 });
-  } else if (depth < 2.5) {
+  }
+  drawAnchoredLayer(layer.pelvis, continuity.anchors.pelvisStart, continuity.anchors.pelvisGlute, () => {
     const pelvis = sketchBox(245, 620, 590, 590, 150, 0.025);
     gfill(pelvis, 'rgba(114,135,154,0.18)', { key: 'pelvis-context', off: [0, 0], a: 1 });
     gline(pelvis, { key: 'pelvis-context-line', w: 6, col: SK.graph, closed: true });
     const muscle = loopPts(630, 905, 175, 245, 0.04, -0.28, 48);
     scribbleFill(muscle, SK.terra, { key: 'glute-muscle', gap: 13, w: 5, a: 0.78, base: 0.22 });
     gline(muscle, { key: 'glute-muscle-line', w: 7, col: SK.terraD, closed: true });
-    handLetter('右侧臀中肌', 650, 1245, 49, { face: 'marker', col: SK.ink, align: 'center', reveal: 1, key: 'glute-name', jit: 0.45 });
-  } else if (depth < 4.2) {
+    if (activeLayer === 'pelvis') handLetter('右侧臀中肌', 650, 1245, 49, { face: 'marker', col: SK.ink, align: 'center', reveal: 1, key: 'glute-name', jit: 0.45 });
+  });
+  drawAnchoredLayer(layer.fascicle, continuity.anchors.fascicleStart, continuity.anchors.fascicleCapillary, () => {
     const fascicle = loopPts(540, 930, 365, 250, 0.025, 0, 54);
     gfill(fascicle, 'rgba(217,119,87,0.14)', { key: 'fascicle-fill', off: [0, 0], a: 1 });
     gline(fascicle, { key: 'fascicle-line', w: 7, col: SK.terraD, closed: true });
     for (let i = -3; i <= 3; i++) gpencil([[250, 930 + i * 48], [830, 920 + i * 47]], { key: 'fascicle-fiber-' + i, w: 6, col: SK.terra, a: 0.58, passes: 1 });
     gpencil([[300, 810], [430, 870], [560, 835], [720, 900], [835, 860]], { key: 'fascicle-capillary', w: 13, col: '#b65b51', a: 0.78, passes: 2 });
-    handLetter('肌束中的毛细血管', 540, 1265, 47, { face: 'marker', col: SK.ink, align: 'center', reveal: 1, key: 'fascicle-label', jit: 0.45 });
-  } else {
-    drawMicroDiagram(exiting ? 66 : global, 1);
+    if (activeLayer === 'fascicle') handLetter('肌束中的毛细血管', 540, 1265, 47, { face: 'marker', col: SK.ink, align: 'center', reveal: 1, key: 'fascicle-label', jit: 0.45 });
+  });
+  drawAnchoredLayer(layer.micro, continuity.anchors.microStart, continuity.anchors.microCenter, () => {
+    drawMicroDiagram(exiting ? 66 : global, 1, activeLayer === 'micro');
     if (exiting) {
       handLetter('葡萄糖留在细胞内 · 相机沿原锚点退出', 540, FT.VISUAL_LAYOUT.exitNoteY, 34, { col: SK.graph, align: 'center', reveal: 1, key: 'not-reverse', jit: 0.35 });
     }
-  }
+  });
 }
 
 function drawEvidence(scene) {
