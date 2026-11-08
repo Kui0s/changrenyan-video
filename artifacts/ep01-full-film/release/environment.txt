@@ -8,7 +8,7 @@ os=Microsoft Windows NT 10.0.26200.0
 upstream_origin=https://github.com/cth9191/animate.git
 upstream_commit=7e5eb56feb2dd573f890e1b7b34748af43d58263
 upstream_clean=true
-source_commit=8ba3d2b428977d6dddf49890ad678dcc235b545b
+source_commit=791661fa50ae8b0df01cd3901b4c0d5244b0eebc
 playwright_browsers_path=C:\Users\COLORFUL\Documents\Codex\2026-11-06\https-github-com-kui0s-changrenyan-video-2\work\changrenyan-video-full-film\.tools\browsers
 font=C:/Windows/Fonts/simkai.ttf sha256=95b3e69321f4e55f6ecf36b29d1e31a0c1205acfde0117df6472a17494c3cbd2
 font=C:/Windows/Fonts/msyh.ttc sha256=d79c55e68b1131eea0cc1c47be4f572d964f28c682e143db2ad09c1e4cb07a3f

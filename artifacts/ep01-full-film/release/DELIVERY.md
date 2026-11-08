@@ -1,6 +1,6 @@
 # EP01 full-film production delivery
 
-- Source commit: `8ba3d2b428977d6dddf49890ad678dcc235b545b`
+- Source commit: `791661fa50ae8b0df01cd3901b4c0d5244b0eebc`
 - Reviewed content baseline: `content/ep01-story-rebuild-v2@b1d7dde6f591837d57e15af7a5866207992e2367`
 - Upstream engine: `cth9191/animate@7e5eb56feb2dd573f890e1b7b34748af43d58263`
 - Guide-audio master: `ep01-full-film-guide-audio.mp4`
