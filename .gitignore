@@ -7,6 +7,11 @@ node_modules/
 # Local intermediate render caches and private working media
 .cache/
 tmp/
+**/frames/
+**/renders/
+episodes/EP01/sample15/index.html
+episodes/EP01/sample15/review/
+episodes/EP01/full-film/review/
 
 # Keep intentionally committed, reviewable build/test logs; ignore only local caches.
 

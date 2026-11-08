@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP01 full film v2.3</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #1d1a17; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; }
+  canvas { height: min(100vh, calc(100vw * 16 / 9)); width: auto; aspect-ratio: 9 / 16; display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+"use strict";
+const FPS = 24, W = 1080, H = 1920;
+const BPM = 120, BEAT = 60 / BPM, E8 = BEAT / 2, E16 = BEAT / 4;
+const DURATION = 111;
+const NFRAMES = Math.round(DURATION * FPS);
+const LOOP_T = NFRAMES / FPS;
+const SAFE = { top: 190, bottom: 390, right: 80 };
+const HAND = '"KaiTi", "Microsoft YaHei", "Segoe Print", sans-serif';
+const CX = 540;
+
+const ERA_LIST = [[0, DURATION, () => sceneFullFilm()]];
+const SHOTS = [
+  ['01-question', 0, 0, 10, 'meal, proverb, and a question rather than a longevity promise'],
+  ['02-digestion', 0, 10, 22, 'starch digestion and small-intestine absorption with compressed-time notice'],
+  ['03-whole-body', 0, 22, 32, 'one adult walks while several muscle groups participate at different intensity'],
+  ['04-blood-target', 0, 32, 41, 'one blood route ends at the right gluteus medius'],
+  ['05-cell-uptake', 0, 41, 66, 'same-anchor scale journey through capillary wall, interstitium, and muscle membrane'],
+  ['06-return', 0, 66, 78, 'camera exits along the same anchor while glucose remains in the cell'],
+  ['07-evidence', 0, 78, 99, 'eight short-term trials shown with visible uncertainty'],
+  ['08-takeaway', 0, 99, 111, 'same person keeps walking; no promise of living to ninety-nine']
+];
+const TIMELINE = {
+  width: W, height: H, fps: FPS, bpm: BPM, duration: DURATION, frames: NFRAMES, loop: LOOP_T,
+  safe: SAFE, format: 'eight-scene-full-film',
+  shots: SHOTS.map(([key, era, t0, t1, title], index) => ({ id: index + 1, key, era, t0, t1, title })),
+  cuts: [], morphs: [], narration: [],
+  cues: { digestion: 10, wholeBody: 22, target: 32, zoom: 41, return: 66, evidence: 78, takeaway: 99 },
+  acts: [
+    { name: '1 Question', role: 'hook', t0: 0, t1: 10 },
+    { name: '2 Body', role: 'mechanism', t0: 10, t1: 78 },
+    { name: '3 Evidence', role: 'qualification', t0: 78, t1: 99 },
+    { name: '4 Takeaway', role: 'resolution', t0: 99, t1: 111 }
+  ],
+  board: [
+    { t: 5, title: 'the proverb becomes a question', sound: 'soft room tone', next: 'follow the food' },
+    { t: 16, title: 'digestion and absorption are separate', sound: 'pencil ticks', next: 'return to the walker' },
+    { t: 36, title: 'blood route selects one stable target', sound: 'single graphite sweep', next: 'enter the same muscle' },
+    { t: 56, title: 'two biological boundaries stay distinct', sound: 'quiet mechanism pulse', next: 'return along the anchor' },
+    { t: 91, title: 'short-term evidence carries visible limits', sound: 'paper card taps', next: 'qualified takeaway' },
+    { t: 107, title: 'habit, not a longevity promise', sound: 'footsteps recede', next: 'end' }
+  ]
+};
+window.TIMELINE = TIMELINE;
