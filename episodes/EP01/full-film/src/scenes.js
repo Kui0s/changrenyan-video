@@ -104,7 +104,7 @@ function drawAdult(time, x, groundY, scale = 1, options = {}) {
 
 function drawTitle(scene) {
   pageTag('EP01 · ' + scene.id + '/08');
-  const [x0, x1] = handLetter(scene.title, 540, 270, 55, { face: 'marker', col: SK.ink, align: 'center', reveal: ease01(localTime(scene) / 0.8), key: 'scene-title', jit: 0.5, stroke: 1.1 });
+  const [x0, x1] = handLetter(scene.title, 540, 270, FT.titleFontSize(scene.title), { face: 'marker', col: SK.ink, align: 'center', reveal: ease01(localTime(scene) / 0.8), key: 'scene-title', jit: 0.5, stroke: 1.1 });
   highlight(x0, x1, 280, 42, ease01(localTime(scene) / 0.9));
 }
 
@@ -165,6 +165,7 @@ function drawMealQuestion(scene) {
 
 function drawDigestive(scene) {
   const t = localTime(scene);
+  const ambient = FM.ambientMotionAt('02', TT);
   const chainY = 600;
   for (let i = 0; i < 7; i++) {
     const broken = ease01((t - 1.2 - i * 0.16) / 1.5);
@@ -187,7 +188,7 @@ function drawDigestive(scene) {
     const intestine = [];
     for (let i = 0; i < 90; i++) {
       const u = i / 89;
-      intestine.push([430 + u * 250 + Math.sin(u * Math.PI * 10) * 42, 1070 + u * 165]);
+      intestine.push([430 + u * 250 + Math.sin(u * Math.PI * 10 + t * 1.5) * (34 + ambient.pulse * 10), 1070 + u * 165]);
     }
     gpencil(intestine, { key: 'small-intestine', w: 22, col: SK.terra, a: 0.58, passes: 2 });
     gline(intestine, { key: 'small-intestine-line', w: 6, col: SK.terraD, second: false, amp: 0.8 });
@@ -198,6 +199,14 @@ function drawDigestive(scene) {
     const dot = loopPts(glucoseX, 1160 - ease01((t - 6) / 2.8) * 120, 22, 22, 0.07, 0, 20);
     scribbleFill(dot, SK.hilite, { key: 'absorbed-glucose', gap: 6, w: 4, a: 1, base: 0.4 });
     gline(dot, { key: 'absorbed-glucose-line', w: 4, closed: true });
+    for (let i = 0; i < 3; i++) {
+      const flow = ((Math.max(0, t - 6) * 0.22 + i * 0.34) % 1 + 1) % 1;
+      const fx = lerp(610, 820, flow);
+      const fy = lerp(1160, 1040, flow) + Math.sin(t * 2 + i) * 8;
+      const movingDot = loopPts(fx, fy, 12, 12, 0.08, 0, 16);
+      gfill(movingDot, SK.hilite, { key: 'flow-dot-fill-' + i, off: [0, 0], a: 0.55 + ambient.pulse * 0.25 });
+      gline(movingDot, { key: 'flow-dot-' + i, w: 2.5, col: SK.graph, closed: true, a: 0.8 });
+    }
     ctx.restore();
   }
   const noticeA = alphaWindow(TT, 13, 15.2, 0.35);
@@ -257,13 +266,14 @@ function drawBreadcrumb(active) {
 
 function drawMicroDiagram(globalTime, alpha = 1) {
   const glucose = FM.glucoseState(globalTime);
+  const ambient = FM.ambientMotionAt('05', globalTime);
   const vessel = sketchBox(110, 610, 300, 640, 80, 0.025);
   const vesselInner = sketchBox(135, 640, 250, 580, 65, 0.02);
   gfill(vessel, 'rgba(198,84,74,0.14)', { key: 'micro-vessel-fill', off: [0, 0], a: alpha });
   gline(vessel, { key: 'micro-vessel-outer', w: 8, col: SK.graph, closed: true, a: alpha });
   gline(vesselInner, { key: 'micro-vessel-inner', w: 4, col: SK.graphL, closed: true, a: alpha, second: false });
   for (let i = 0; i < 5; i++) {
-    const cell = loopPts(235 + (i % 2) * 65, 725 + i * 92, 31, 17, 0.07, 0, 20);
+    const cell = loopPts(235 + (i % 2) * 65 + Math.sin(globalTime * 1.7 + i) * 13, 725 + i * 92 + Math.cos(globalTime * 1.35 + i) * 9, 31, 17, 0.07, 0, 20);
     gline(cell, { key: 'micro-rbc-' + i, w: 3, col: '#a84d45', closed: true, a: alpha * 0.55 });
   }
   for (let i = 0; i < 6; i++) {
@@ -274,7 +284,10 @@ function drawMicroDiagram(globalTime, alpha = 1) {
   gfill(muscle, 'rgba(217,119,87,0.15)', { key: 'micro-muscle-fill', off: [0, 0], a: alpha });
   gline(muscle, { key: 'micro-muscle-outer', w: 8, col: SK.ink, closed: true, a: alpha });
   gline(muscleInner, { key: 'micro-muscle-inner', w: 4, col: SK.graph, closed: true, a: alpha, second: false });
-  for (let i = 0; i < 5; i++) gline([[725, 735 + i * 92], [925, 735 + i * 92]], { key: 'micro-fiber-' + i, w: 5, col: SK.terraD, a: alpha * 0.5, second: false, amp: 0.7 });
+  for (let i = 0; i < 5; i++) {
+    const inset = 12 + ambient.pulse * 14;
+    gline([[725 + inset, 735 + i * 92], [925 - inset, 735 + i * 92]], { key: 'micro-fiber-' + i, w: 5, col: SK.terraD, a: alpha * 0.5, second: false, amp: 0.7 });
+  }
   const x = lerp(260, 835, glucose.progress);
   const y = 920;
   const route = [[260, y], [390, y], [540, y], [675, y], [835, y]];
@@ -284,8 +297,8 @@ function drawMicroDiagram(globalTime, alpha = 1) {
   const dot = loopPts(x, y, 23, 23, 0.08, 0, 22);
   scribbleFill(dot, SK.hilite, { key: 'micro-glucose-fill', gap: 6, w: 4, a: alpha, base: 0.4 });
   gline(dot, { key: 'micro-glucose-line', w: 4.5, col: SK.ink, closed: true, a: alpha });
-  const labels = [['血液', 250], ['毛细血管壁', 390], ['组织间隙', 540], ['肌细胞膜', 700], ['细胞内', 850]];
-  labels.forEach(([label, lx], index) => handLetter(label, lx, 1245, index === 1 || index === 3 ? 31 : 35, { col: index === 1 || index === 3 ? SK.terraD : SK.graph, align: 'center', reveal: alpha, key: 'micro-label-' + index, jit: 0.3 }));
+  const labels = [['血液', 250], ['毛细血管壁', 390], ['组织间隙', 540], ['肌细胞膜', 690], ['细胞内', FT.VISUAL_LAYOUT.microCellLabelX]];
+  labels.forEach(([label, lx], index) => handLetter(label, lx, FT.VISUAL_LAYOUT.microLabelsY, index === 1 || index === 3 ? 29 : 33, { col: index === 1 || index === 3 ? SK.terraD : SK.graph, align: 'center', reveal: alpha, key: 'micro-label-' + index, jit: 0.3 }));
 }
 
 function drawScaleJourney(scene, exiting = false) {
@@ -321,17 +334,18 @@ function drawScaleJourney(scene, exiting = false) {
   } else {
     drawMicroDiagram(exiting ? 66 : global, 1);
     if (exiting) {
-      handLetter('葡萄糖留在细胞内 · 相机沿原锚点退出', 540, 1265, 36, { col: SK.graph, align: 'center', reveal: 1, key: 'not-reverse', jit: 0.35 });
+      handLetter('葡萄糖留在细胞内 · 相机沿原锚点退出', 540, FT.VISUAL_LAYOUT.exitNoteY, 34, { col: SK.graph, align: 'center', reveal: 1, key: 'not-reverse', jit: 0.35 });
     }
   }
 }
 
 function drawEvidence(scene) {
   const t = localTime(scene);
+  const ambient = FM.ambientMotionAt('07', TT);
   const cardIn = ease01(t / 2.2);
   for (let i = 0; i < 8; i++) {
     const col = i % 4, row = Math.floor(i / 4);
-    const x = 120 + col * 225, y = 560 + row * 220;
+    const x = 120 + col * 225, y = 560 + row * 220 + Math.sin(TT * 1.3 + i) * (2 + ambient.pulse * 3);
     const card = sketchBox(x, y, 175, 150, 20, 0.025);
     gfill(card, i % 2 ? 'rgba(231,217,184,0.5)' : 'rgba(114,135,154,0.16)', { key: 'study-card-fill-' + i, off: [0, 0], a: cardIn });
     gline(card, { key: 'study-card-' + i, w: 4, col: SK.graph, closed: true, a: cardIn });
@@ -345,6 +359,8 @@ function drawEvidence(scene) {
   const right = [[660, 1310], [730, 1278], [800, 1268], [870, 1260]];
   gpencil(left, { key: 'qualitative-exercise', w: 6, col: SK.terraD, a: compare, passes: 1 });
   gpencil(right, { key: 'qualitative-control', w: 6, col: SK.graph, a: compare, passes: 1 });
+  const scanX = lerp(180, 870, ambient.scan);
+  gpencil([[scanX - 42, 1125], [scanX, 1105], [scanX + 42, 1125]], { key: 'evidence-scan', w: 5, col: SK.hiliteD, a: 0.45 + ambient.pulse * 0.35, passes: 1 });
   handLetter('总体方向：餐后波动较小', 540, 1215, 42, { col: SK.ink, align: 'center', reveal: ease01((t - 9) / 1), key: 'overall-direction', jit: 0.4 });
   const limit = alphaWindow(TT, 94, 97, 0.4);
   const [x0, x1] = handLetter('研究规模有限 · 不是人人都一样', 540, 1265, 43, { face: 'marker', col: SK.ink, align: 'center', reveal: limit, key: 'research-limit', jit: 0.45 });

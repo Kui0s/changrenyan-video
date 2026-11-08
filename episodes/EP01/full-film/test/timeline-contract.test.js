@@ -8,6 +8,8 @@ const {
   subtitleAt,
   observationWindows,
   SUBTITLE_LAYOUT,
+  VISUAL_LAYOUT,
+  titleFontSize,
 } = require('../src/timeline.js');
 
 test('full film is an eight-scene continuous 111-second timeline below the release cap', () => {
@@ -60,4 +62,10 @@ test('subtitle panel remains above the phone bottom safe zone', () => {
   assert.ok(SUBTITLE_LAYOUT, 'timeline must expose the subtitle layout contract');
   assert.ok(SUBTITLE_LAYOUT.y + SUBTITLE_LAYOUT.height <= 1530);
   assert.ok(SUBTITLE_LAYOUT.lineCount <= 4);
+});
+
+test('long scene titles and microscopic labels stay clear of phone UI and each other', () => {
+  assert.ok(titleFontSize(SCENES.at(-1).title) <= 46);
+  assert.ok(VISUAL_LAYOUT.microCellLabelX <= 830);
+  assert.ok(Math.abs(VISUAL_LAYOUT.microLabelsY - VISUAL_LAYOUT.exitNoteY) >= 120);
 });

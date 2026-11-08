@@ -7,6 +7,7 @@ const {
   walkerState,
   scaleJourneyAt,
   glucoseState,
+  ambientMotionAt,
 } = require('../src/film-model.js');
 
 test('person_01 has adult proportions, connected body volumes, and visible shoes', () => {
@@ -74,4 +75,15 @@ test('glucose crosses the two distinct biological boundaries in order and is not
     assert.ok(checkpoints[i].progress >= checkpoints[i - 1].progress);
   }
   assert.equal(checkpoints.at(-1).region, 'muscle-cell');
+});
+
+test('long explanation holds retain visible ambient motion instead of becoming slides', () => {
+  const digestion = [18, 19, 20, 21].map((time) => ambientMotionAt('02', time));
+  const evidenceA = [80.25, 81.25, 82.25, 83.25].map((time) => ambientMotionAt('07', time));
+  const evidenceB = [89.75, 90.75, 91.75, 92.75].map((time) => ambientMotionAt('07', time));
+
+  for (const samples of [digestion, evidenceA, evidenceB]) {
+    assert.ok(new Set(samples.map((sample) => sample.scan.toFixed(3))).size >= 3);
+    assert.ok(new Set(samples.map((sample) => sample.pulse.toFixed(3))).size >= 3);
+  }
 });

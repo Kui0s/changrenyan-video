@@ -23,6 +23,18 @@
     charactersPerLine: 22,
   });
 
+  const VISUAL_LAYOUT = Object.freeze({
+    microLabelsY: 1225,
+    microCellLabelX: 815,
+    exitNoteY: 520,
+  });
+
+  function titleFontSize(title) {
+    if (title.length > 15) return 44;
+    if (title.length > 12) return 48;
+    return 55;
+  }
+
   const SCENES = Object.freeze([
     {
       id: '01', start: 0, end: 10, key: 'question',
@@ -100,6 +112,8 @@
     subtitleAt,
     observationWindows,
     SUBTITLE_LAYOUT,
+    VISUAL_LAYOUT,
+    titleFontSize,
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.EP01FullTimeline = api;

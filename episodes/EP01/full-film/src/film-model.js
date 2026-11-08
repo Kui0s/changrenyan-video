@@ -115,6 +115,14 @@
     return { ...GLUCOSE_STOPS.at(-1) };
   }
 
+  function ambientMotionAt(sceneId, time) {
+    const offset = sceneId === '07' ? 1.15 : 0;
+    return {
+      scan: (Math.sin((time + offset) * 1.73) + 1) / 2,
+      pulse: (Math.sin((time + offset) * 2.37 + 0.6) + 1) / 2,
+    };
+  }
+
   const api = {
     ANCHOR_CHAIN,
     characterPose,
@@ -122,6 +130,7 @@
     scaleJourneyAt,
     glucoseState,
     GLUCOSE_STOPS,
+    ambientMotionAt,
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.EP01FullModel = api;
