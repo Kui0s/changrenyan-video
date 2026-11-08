@@ -1,0 +1,18 @@
+
+> changrenyan-video@0.1.0 test
+> node --test episodes/EP01/sample15/test/*.test.js
+
+✔ gait alternates planted feet while keeping joint motion continuous (1.6702ms)
+✔ support foot stays on the ground without sliding during each stance (0.609ms)
+✔ camera follows the supplied right-leg joint target before entering the tissue view (0.8902ms)
+✔ glucose crosses capillary wall, interstitial space, and muscle membrane in order (1.5776ms)
+✔ transition fades the walker before the microscopic diagram fills the page (0.522ms)
+✔ muscle contraction is visible at phone scale while preserving cell area directionally (0.1823ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 107.4141

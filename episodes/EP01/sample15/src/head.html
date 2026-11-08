@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP01 original 15-second sample</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #1d1a17; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; }
+  canvas { height: min(100vh, calc(100vw * 16 / 9)); width: auto; aspect-ratio: 9 / 16; display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+"use strict";
+const FPS = 24, W = 1080, H = 1920;
+const BPM = 120, BEAT = 60 / BPM, E8 = BEAT / 2, E16 = BEAT / 4;
+const DURATION = 15;
+const NFRAMES = Math.round(DURATION * FPS);
+const LOOP_T = NFRAMES / FPS;
+const SAFE = { top: 220, bottom: 370, right: 80 };
+const HAND = '"KaiTi", "Microsoft YaHei", "Segoe Print", sans-serif';
+const CX = 540;
+
+const ERA_LIST = [[0, 15, () => sceneSample()]];
+const SHOTS = [
+  ['walk', 0, 0, 4, 'three continuous steps with shifting joints and centre of mass'],
+  ['follow-leg', 0, 4, 7, 'camera remains anchored to the moving right leg and reveals the inner view'],
+  ['two-boundaries', 0, 7, 13, 'glucose crosses capillary wall, interstitial space, then muscle membrane'],
+  ['hold-path', 0, 13, 15, 'the complete two-boundary route remains visible for reading']
+];
+const TIMELINE = {
+  width: W, height: H, fps: FPS, bpm: BPM, duration: DURATION, frames: NFRAMES, loop: LOOP_T,
+  safe: SAFE, format: 'continuous-sample',
+  shots: SHOTS.map(([key, era, t0, t1, title], i) => ({ id: i + 1, key, era, t0, t1, title })),
+  cuts: [], morphs: [], narration: [],
+  cues: { walkEnd: 4, revealStart: 4, microStart: 7, pathDone: 13, holdEnd: 15 },
+  acts: [
+    { name: '1 Walk', role: 'action', t0: 0, t1: 4 },
+    { name: '2 Follow', role: 'transition', t0: 4, t1: 7 },
+    { name: '3 Uptake', role: 'mechanism', t0: 7, t1: 13 },
+    { name: '4 Read', role: 'hold', t0: 13, t1: 15 }
+  ],
+  board: [
+    { t: 2, title: 'alternating three-step gait', sound: 'light footfalls', next: 'follow the same right leg' },
+    { t: 5.5, title: 'the calf becomes the spatial anchor', sound: 'pencil sweep', next: 'open the tissue view' },
+    { t: 10.3, title: 'glucose has crossed the capillary wall', sound: 'soft graphite ticks', next: 'cross the muscle membrane' },
+    { t: 14, title: 'the full route remains on the page', sound: 'quiet hold', next: 'end' }
+  ]
+};
+window.TIMELINE = TIMELINE;

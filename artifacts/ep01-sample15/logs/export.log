@@ -1,0 +1,21 @@
+index.html: 1080x1920, 360 frames @ 24fps (15.0000s)
+  24/360 frames  60ms/frame
+  48/360 frames  57ms/frame
+  72/360 frames  54ms/frame
+  96/360 frames  53ms/frame
+  120/360 frames  53ms/frame
+  144/360 frames  53ms/frame
+  168/360 frames  53ms/frame
+  192/360 frames  53ms/frame
+  216/360 frames  53ms/frame
+  240/360 frames  53ms/frame
+  264/360 frames  53ms/frame
+  288/360 frames  53ms/frame
+  312/360 frames  53ms/frame
+  336/360 frames  53ms/frame
+  360/360 frames  52ms/frame
+frames 0..359 written in 18.9s
+audio.wav written (2.88 MB) in 0.5s
+stems written: stem-music.wav, stem-sfx.wav in 1.3s
+wrote C:\Users\COLORFUL\Documents\Codex\2026-11-06\https-github-com-kui0s-changrenyan-video-2\work\changrenyan-video\episodes\EP01\sample15\renders\final.mp4
+wrote C:\Users\COLORFUL\Documents\Codex\2026-11-06\https-github-com-kui0s-changrenyan-video-2\work\changrenyan-video\episodes\EP01\sample15\renders\share.mp4
