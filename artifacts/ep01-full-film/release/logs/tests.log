@@ -1,0 +1,37 @@
+
+> changrenyan-video@0.1.0 test
+> node --test episodes/EP01/sample15/test/*.test.js episodes/EP01/full-film/test/*.test.js
+
+✔ person_01 has adult proportions, connected body volumes, and visible shoes (2.1085ms)
+✔ alternating stance feet remain grounded and locked in world space (1.2241ms)
+✔ macro-to-micro camera uses the reviewed right gluteus chain and returns to the same person (3.0117ms)
+✔ scene 04 last frame and scene 05 first frame share the same P0 person and right-glute anchor (0.5574ms)
+✔ each scale unlock preserves a visible parent layer and a shared child origin (0.6994ms)
+✔ scene 06 inherits the scene 05 terminal micro geometry before pulling back (0.4219ms)
+✔ glucose crosses the two distinct biological boundaries in order and is not reversed on camera exit (0.2465ms)
+✔ long explanation holds retain visible ambient motion instead of becoming slides (0.3592ms)
+✔ SRT time formatting handles the full-film minute boundary (1.4102ms)
+✔ subtitle export contains all eight reviewed narration segments and ends at 111 seconds (0.8855ms)
+✔ full film is an eight-scene continuous 111-second timeline below the release cap (1.4341ms)
+✔ scene four has one foreground story and hands the same anatomical target to scene five (0.9883ms)
+✔ mandatory explanation windows stay independently readable (0.322ms)
+✔ every scene owns a non-empty Chinese subtitle during its narration window (1.6222ms)
+✔ subtitle panel remains above the phone bottom safe zone (0.1816ms)
+✔ long scene titles and microscopic labels stay clear of phone UI and each other (0.1903ms)
+✔ scale breadcrumb keeps its final cell label inside the phone right safe edge (0.1405ms)
+✔ dense mechanism subtitles use a narrower phone-safe measure (0.1622ms)
+✔ skip-render delivery requires a render sidecar matching the current source commit (0.5696ms)
+✔ gait alternates planted feet while keeping joint motion continuous (1.9016ms)
+✔ support foot stays on the ground without sliding during each stance (0.7345ms)
+✔ camera follows the supplied right-leg joint target before entering the tissue view (1.0438ms)
+✔ glucose crosses capillary wall, interstitial space, and muscle membrane in order (0.9332ms)
+✔ transition fades the walker before the microscopic diagram fills the page (1.1311ms)
+✔ muscle contraction is visible at phone scale while preserving cell area directionally (0.2662ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 165.5021

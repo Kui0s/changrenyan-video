@@ -1,0 +1,3 @@
+command=playwright install chromium
+exit_code=0
+note=no stdout was emitted because the pinned Chromium build was already installed
