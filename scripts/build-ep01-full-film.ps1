@@ -62,8 +62,11 @@ try {
         npm ci --no-audit --no-fund 2>&1 | Tee-Object -FilePath (Join-Path $logRoot "npm-ci.log")
         Assert-NativeSuccess "npm ci"
         $env:PLAYWRIGHT_BROWSERS_PATH = $browserRoot
+        $playwrightLog = Join-Path $logRoot "playwright-install.log"
+        "command=playwright install chromium" | Set-Content -LiteralPath $playwrightLog -Encoding utf8NoBOM
         & (Join-Path $repoRoot "node_modules/.bin/playwright.cmd") install chromium 2>&1 |
-            Tee-Object -FilePath (Join-Path $logRoot "playwright-install.log")
+            Tee-Object -FilePath $playwrightLog -Append
+        "exit_code=$LASTEXITCODE" | Add-Content -LiteralPath $playwrightLog -Encoding utf8NoBOM
         Assert-NativeSuccess "install Chromium"
     }
 
@@ -194,6 +197,12 @@ try {
 The embedded audio is a sparse timing guide, not formal Mandarin narration. The package includes ``ep01-full-film-zh-CN.srt`` and a clean master for Jianying AI narration or the user's recording. Final A-dimension review, independent full-video review, independent engineering review, user release approval, merge, and publication are not claimed.
 "@
     $delivery | Set-Content -LiteralPath (Join-Path $artifactRoot "DELIVERY.md") -Encoding utf8NoBOM
+
+    Get-ChildItem -LiteralPath $logRoot -File | ForEach-Object {
+        (Get-Content -LiteralPath $_.FullName) |
+            ForEach-Object { $_.TrimEnd() } |
+            Set-Content -LiteralPath $_.FullName -Encoding utf8NoBOM
+    }
 
     Get-ChildItem -LiteralPath $artifactRoot -Recurse -File |
         Where-Object Name -ne "manifest.sha256" |
