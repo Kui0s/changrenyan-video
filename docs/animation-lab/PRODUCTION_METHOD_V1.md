@@ -126,3 +126,12 @@
 ## 八、下一步仍需要实际验证
 
 本文件是**经过静态源码研究的工作方法**，不能称“已经掌握高质量视频制作”。下一轮须真正执行`METHOD_PROOF_TASK.md`的形状morph能力验证与人体内视验证，并额外完成**普通话音轨时间轴适配**。只有新原创画面能够通过用户视觉要求、独立视频审查后，才可将对应能力从`UNVERIFIED`升级到`PROVEN`。
+
+## 九、研究中新增的真实源码候选（仍未完成实证）
+
+除了`cth9191/animate`的故事、造型、手绘、morph与RenderFrame流程，发现 `lemomo-ai/lemo-opuscar`提供两类更匹配的**候选补充**：
+
+- `styles/microscope/demo/film.js`在一份已配准的真实玻片扫描上实现从玻片到细胞核再返回的连续相机，核心为`camAt`对数螺旋与多分辨率plate的`activeLevel/plateAlpha`。它证明这种空间摄影在**静态同一样本**上有具体代码，却不能未经验证直接用于活体人体的科学过程动画。
+- `core/tts/tts_zh.py`、`core/tts/asr_check.py`、`core/render/readcheck.mjs`提供普通话朗读、中文字符级语音对照、文字阅读时长检测的实现线索，能补上原`animate`默认英文ASR的空白；但需要在我们的工作环境实际跑通并检查权限、音色与字幕同步。
+
+源码与科学使用边界详见`ADJACENT_IMPLEMENTATIONS_V1.md`；它们分别作为G2能力验证和G5语音制作的候选输入。**不能因为发现代码，就跳过G3真实画面、G4真实分镜和G8独立盲看。**
