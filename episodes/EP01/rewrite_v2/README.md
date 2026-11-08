@@ -1,6 +1,6 @@
-# 《常人言》EP01｜完整视频内容与导演方案重构（送独立审查）
+# 《常人言》EP01｜完整正片内容与导演R01定向返工（待独立R02）
 
-> **状态：CREATOR DRAFT / NOT YET INDEPENDENTLY APPROVED / CODEX FULL PRODUCTION NOT AUTHORIZED。**
+> **状态：CREATOR REVISION / R01 REVISE 81.3 / INDEPENDENT R02 PENDING / CODEX FULL PRODUCTION NOT AUTHORIZED。**
 > **用户最新制作决定：不再设置15秒样片前置阶段，直接准备完整正片的所有文字、导演、视觉与工程交接内容。正式制作须在独立审核通过、用户授权后启动。**
 
 ## 项目定位
@@ -11,7 +11,7 @@
 
 ## 相较旧方案的根本改变
 
-1. **不再只盯腿部。** 全身人物、消化系统、小肠吸收、血液循环、多个骨骼肌群及细胞层面的变化构成完整视觉路线；在肌肉细胞层面只选**具有代表性的一处**解释微观机制，避免伪装每个器官细胞以同样方式运作。
+1. **不再只盯腿部。** 全身人物、消化系统、小肠吸收、血液循环、多个骨骼肌群及细胞层面的变化构成完整视觉路线；在肌肉细胞层面只选**固定的右侧臀中肌一处**解释微观机制，避免伪装每个器官细胞以同样方式运作。
 2. **多尺度空间穿越：** 整个人体全景 → 全身透视肌群与器官 → 指定活动骨骼肌局部 → 细胞膜与葡萄糖摄取 → 退回多肌群/整个人 → 日常活动结尾。放大后必须真正揭示新细节，不能只放大静态图层。
 3. **人物要像正常人。** 不沿用旧样片的长条躯干/脱节线腿占位角色，按真实人体连贯结构设计成年角色。
 4. **从观众的一次观看理解出发。** 审核不能将“程序能绘制、关节测试通过”替代人物设计与信息表达。
@@ -20,11 +20,18 @@
 ## 文件导航（本目录为唯一新版创作基线）
 
 - [SCRIPT_V2.md](SCRIPT_V2.md)：整期完整中文口播，8段。
-- [DIRECTOR_V3.md](DIRECTOR_V3.md)：约100–115秒的整期逐镜导演和动作方案（可配音调整，最终<120秒）。
-- [CHARACTER_AND_CAMERA.md](CHARACTER_AND_CAMERA.md)：完整人体人物、透视与微观镜头设计原则。
+- [DIRECTOR_V3.md](DIRECTOR_V3.md)：111秒双轨暂定节拍、逐阶段空间锚点与观察窗（可配音调整，最终<120秒）。
+- [CHARACTER_AND_CAMERA.md](CHARACTER_AND_CAMERA.md)：唯一 `person_01` 人体比例/服装基准、四姿态内部验收、右臀中肌多尺度锚点。
 - [EVIDENCE_AND_BOUNDARIES.md](EVIDENCE_AND_BOUNDARIES.md)：研究证据、不同器官职责、夸大风险与视觉约束。
 - [FULL_FILM_PRODUCTION_HANDOFF.md](FULL_FILM_PRODUCTION_HANDOFF.md)：审核批准后交给 Codex 的完整成片工程交接；**当前不得直接执行**。
-- [INDEPENDENT_REVIEW_HANDOFF.md](INDEPENDENT_REVIEW_HANDOFF.md)：给全新独立上下文专家审稿人的任务和证据。
+- [INDEPENDENT_REVIEW_HANDOFF.md](INDEPENDENT_REVIEW_HANDOFF.md)：给全新独立上下文专家审稿人的 **R02复审**任务和证据。
+- [REVISION_RESPONSE_R01.md](REVISION_RESPONSE_R01.md)：R01六项缺陷逐项整改映射和待独立复核项。
+
+## 本轮审核状态
+
+- **R01正式结果：81.3/100，REVISE/NO_GO**，已保存在主分支 `episodes/EP01/reviews/FULL_FILM_CONTENT_REVIEW_R01.md`；其对应的原草案SHA是 `9baba1804506a49843333cc275580a2c64792cbe`。
+- 本次返工版本为 `SCRIPT_V2.md v2.3`、`DIRECTOR_V3.md v3.2`、`CHARACTER_AND_CAMERA.md v2.1`、`EVIDENCE_AND_BOUNDARIES.md v2.2`。**不存在新的独立R02结论**；不得援引R01或此前样片分数作为新的PASS。
+- 核心调整：04只显示血液运输和右臀中肌定位；05/06固定空间ID和节拍；人物身份与四姿态；111秒双轨预算；短期证据明确有限；02提示时间压缩。
 
 ## 审核与执行边界
 
