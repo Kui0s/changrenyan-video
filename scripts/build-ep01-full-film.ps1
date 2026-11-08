@@ -56,7 +56,12 @@ Push-Location $repoRoot
 try {
     $sourceCommit = (git rev-parse HEAD).Trim()
     Assert-NativeSuccess "read source commit"
+    $sourceTreeDirty = @(git status --porcelain --untracked-files=no -- episodes/EP01/full-film scripts/build-ep01-full-film.ps1)
+    Assert-NativeSuccess "inspect full-film source status"
+    if ($sourceTreeDirty.Count -gt 0) { throw "full-film source contains uncommitted changes" }
+    $sourceVideo = Join-Path $pieceRoot "renders/final.mp4"
     $renderCommitFile = Join-Path $pieceRoot "renders/render-source-commit.txt"
+    $renderHashFile = Join-Path $pieceRoot "renders/render-master.sha256"
 
     if (-not $SkipInstall) {
         npm ci --no-audit --no-fund 2>&1 | Tee-Object -FilePath (Join-Path $logRoot "npm-ci.log")
@@ -90,6 +95,8 @@ try {
             Tee-Object -FilePath (Join-Path $logRoot "export.log")
         Assert-NativeSuccess "export full film"
         $sourceCommit | Set-Content -LiteralPath $renderCommitFile -Encoding utf8NoBOM
+        (Get-FileHash -Algorithm SHA256 -LiteralPath $sourceVideo).Hash.ToLowerInvariant() |
+            Set-Content -LiteralPath $renderHashFile -Encoding utf8NoBOM
     } else {
         if (-not (Test-Path -LiteralPath $renderCommitFile)) {
             throw "rendered master has no render-source-commit.txt; run without -SkipRender"
@@ -98,9 +105,16 @@ try {
         if ($renderedSourceCommit -ne $sourceCommit) {
             throw "rendered master belongs to $renderedSourceCommit, not current source $sourceCommit; run without -SkipRender"
         }
+        if (-not (Test-Path -LiteralPath $renderHashFile)) {
+            throw "rendered master has no render-master.sha256; run without -SkipRender"
+        }
+        $expectedRenderHash = (Get-Content -LiteralPath $renderHashFile -Raw).Trim()
+        $actualRenderHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $sourceVideo).Hash.ToLowerInvariant()
+        if ($actualRenderHash -ne $expectedRenderHash) {
+            throw "rendered master hash does not match render-master.sha256; run without -SkipRender"
+        }
     }
 
-    $sourceVideo = Join-Path $pieceRoot "renders/final.mp4"
     if (-not (Test-Path -LiteralPath $sourceVideo)) { throw "rendered master missing: $sourceVideo" }
     $guideVideo = Join-Path $artifactRoot "ep01-full-film-guide-audio.mp4"
     $cleanVideo = Join-Path $artifactRoot "ep01-full-film-clean-master.mp4"

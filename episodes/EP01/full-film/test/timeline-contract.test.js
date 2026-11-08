@@ -88,5 +88,8 @@ test('dense mechanism subtitles use a narrower phone-safe measure', () => {
 test('skip-render delivery requires a render sidecar matching the current source commit', () => {
   const script = fs.readFileSync(path.resolve(__dirname, '../../../../scripts/build-ep01-full-film.ps1'), 'utf8');
   assert.match(script, /render-source-commit\.txt/u);
+  assert.match(script, /render-master\.sha256/u);
+  assert.match(script, /full-film source contains uncommitted changes/u);
   assert.match(script, /rendered master belongs to .* current source/u);
+  assert.match(script, /rendered master hash does not match/u);
 });

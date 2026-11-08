@@ -16,7 +16,7 @@ Creator-side implementation of the eight-scene, 111-second, 9:16 full film autho
 
 ## Creator verification
 
-- Automated contract tests: 25 passed, 0 failed, including 04→05 P0 boundary geometry, parent/child scale-layer overlap, 05→06 inheritance, and render-source lineage enforcement.
+- Automated contract tests: 26 passed, 0 failed, including an actual Playwright renderer probe at frames 983/984, parent/child scale-layer overlap, 05→06 inheritance, and commit-plus-hash render lineage enforcement.
 - Build: syntax valid; no external runtime assets.
 - Full-film review: story arc PASS; no flat frames; dead beats PASS with 0 stretches over 3 seconds.
 - Text trace: PASS with 0 cut-off/overlap and 0 phone safe-zone warnings across 452 sampled frames.
