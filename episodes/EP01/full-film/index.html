@@ -1068,6 +1068,8 @@ const STYLE = {
     microLabelsY: 1225,
     microCellLabelX: 815,
     exitNoteY: 520,
+    breadcrumbFirstX: 105,
+    breadcrumbLastX: 940,
   });
 
   function titleFontSize(title) {
@@ -1565,7 +1567,7 @@ function drawBloodTarget(scene) {
 function drawBreadcrumb(active) {
   const labels = ['整个人', '右髋肌肉', '肌束', '毛细血管', '组织间隙', '肌细胞'];
   labels.forEach((label, index) => {
-    const x = 105 + index * 174;
+    const x = lerp(FT.VISUAL_LAYOUT.breadcrumbFirstX, FT.VISUAL_LAYOUT.breadcrumbLastX, index / (labels.length - 1));
     const activeAlpha = index <= active ? 1 : 0.28;
     handLetter(label, x, 400, 29, { col: index === active ? SK.terraD : SK.graph, align: 'center', reveal: activeAlpha, key: 'crumb-' + index, jit: 0.3 });
     if (index < labels.length - 1) arrowPencil([[x + 60, 402], [x + 110, 402]], index < active ? 1 : 0.18);

@@ -72,6 +72,10 @@ test('long scene titles and microscopic labels stay clear of phone UI and each o
   assert.ok(Math.abs(VISUAL_LAYOUT.microLabelsY - VISUAL_LAYOUT.exitNoteY) >= 120);
 });
 
+test('scale breadcrumb keeps its final cell label inside the phone right safe edge', () => {
+  assert.ok(VISUAL_LAYOUT.breadcrumbLastX <= 940);
+});
+
 test('dense mechanism subtitles use a narrower phone-safe measure', () => {
   assert.ok(subtitleFontSize('05') <= 32);
   assert.ok(subtitleFontSize('06') <= 32);

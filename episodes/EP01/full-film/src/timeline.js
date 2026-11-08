@@ -27,6 +27,8 @@
     microLabelsY: 1225,
     microCellLabelX: 815,
     exitNoteY: 520,
+    breadcrumbFirstX: 105,
+    breadcrumbLastX: 940,
   });
 
   function titleFontSize(title) {
