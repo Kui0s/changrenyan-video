@@ -40,8 +40,8 @@
 - 使用2–3句**合法临时普通话测试音轨**验证技术链，不要求用户提前决定剪映AI还是自己配音，也不能将试验C的音频冒充最终正式配音。原版`voice_words.py`默认`small.en`/`language='en'`，`voice.mjs`的英文`norm()`会丢失中文，`review.mjs`空格数词速无效；必须修正或隔离。
 - 制作分句文本与实际声音，记录`cue_id, text, start_s, end_s, highlighted_event_t, speaker, source/rights`。中文ASR（如`--lang zh`）只是候选，应对照音频人工核验关键时间点和数字，不声称词级精度已自动证明。
 - **必须在当前Canvas动画中实现检查适配层**：暴露`window.DUR`及`window.TEXTS(t)`，后者要返回每条实际显示文字的`id, text, x0, y0, x1, y1`，并与渲染时刻的可见状态、真实手机视口、字幕出现/消失时间一致。推荐直接在Canvas`fillText/strokeText`调用层记录或从唯一字幕数据模型生成；不可写一份与实际画面无关的假的TEXTS对象。
-- 通过实例：3句字幕按真实普通话逐句出现，提供360px手机预览、音画对齐表，运行`lemo-opuscar/core/render/readcheck.mjs`和人工实际读图；工具输出与视频文本位置一致。
-- **故意制造负例并必须被抓住**：至少一次将两条字幕叠在同一位置（OVERLAP→FAIL），一次让中文句子短暂闪现不足正常阅读时间（DURATION→FAIL），一次去掉`window.TEXTS`或`window.DUR`（结果必须为`NOT CHECKED`且不能计为PASS）。还需证明关键中文词不会在英文正则中被清空；日志给出真实exit/status、失败原因与对应帧。
+- 通过实例：3句字幕按真实普通话逐句出现，提供360px手机预览、音画对齐表，运行`lemo-opuscar/core/render/readcheck.mjs`的**阅读时长与视口检查**、另运行**文字重叠检查**，并人工实际读图；工具输出与视频文本位置一致。
+- **故意制造负例并必须被抓住**：至少一次将两条字幕叠在同一位置（须由**额外几何重叠检查**或`textcheck.mjs`等相应工具报告OVERLAP→FAIL；**`readcheck.mjs`本身不检测重叠**）；一次让中文句子短暂闪现不足正常阅读时间（`readcheck.mjs`应返回BAD/exit 1）；一次让字幕越出视口（`readcheck.mjs`应报告never fully visible/exit 1）；一次去掉`window.TEXTS`或将`window.DUR`设为无效（`readcheck.mjs`应输出`NOT CHECKED`且exit 2，不能计为PASS）。还需证明关键中文词不会在英文正则中被清空；日志给出真实exit/status、失败原因与对应帧。
 - 实验C的通过只说明普通话临时音画管线能够工作，**不证明最终剪映声音已锁定**；正式成片按用户的`docs/VOICE_AND_DURATION_POLICY.md`在后期合成实际声音，并重新核对时间轴/字幕/时长后才评A维。
 
 ## 三、制作步骤与权限
