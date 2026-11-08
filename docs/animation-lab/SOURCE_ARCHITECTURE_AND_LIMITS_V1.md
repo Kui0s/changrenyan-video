@@ -37,7 +37,7 @@ MP4母版、字幕预览、手机share
 
 - `kit/morph.js`：`renderFrame(t)`根据`FPS`计算`F`，用`B=floor(F/2)`作为on-2s笔触时刻；`STYLE.ones`为true时可逐帧更新，其他主要采用2帧为一组的手绘节奏。`renderEra`每帧重置Canvas并应用`pieceCam`世界坐标变换。
 - `ERA_LIST`定义不同时间段场景绘制函数；`TIMELINE.shots`描述每段，`cues`控制描线与物件动作，`board`导出真实关键帧。
-- `kit/core.js`：有`RNG`稳定扰动、`ink/pencil/hatch`绘图、`springMove/springTrack`等状态无关的运动函数、`camOf/push/bump`等相机基础。
+- `kit/core.js`：有`RNG`稳定扰动、`ink/pencil/hatch`绘图、`springMove/springTrack`等状态无关的运动函数；`camOf/push/bump`所在实现是`kit/morph.js`，不要在复用时误找源文件。
 - **误区：** “同一帧可重新渲染”“脚底坐标不变”属于工程/运动形式条件，不等于人体或镜头好看。
 
 ### 2.2 真正的形状变形
