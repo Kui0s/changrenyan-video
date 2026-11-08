@@ -2,7 +2,7 @@
 
 > **状态：创作草案；未独立审核；未放行 Codex 制作。**
 > 主题：《饭后走一走，活到九十九》——走路时，身体里究竟发生了什么？
-> 唯一口播 `SCRIPT_V2.md v2.1`；科学依据 `EVIDENCE_AND_BOUNDARIES.md`；视觉合同 `CHARACTER_AND_CAMERA.md`。
+> 唯一口播 `SCRIPT_V2.md v2.2`；科学依据 `EVIDENCE_AND_BOUNDARIES.md`；视觉合同 `CHARACTER_AND_CAMERA.md`。
 > 9:16竖屏，Sketchbook 手绘风格；**全片严格<120秒**。下表是约116秒的镜头与旁白预算，实际须按自然普通话实读和视频理解调整，绝不允许为满足时间码而一味加速。
 
 ## 0. 这支片子的真正主角
