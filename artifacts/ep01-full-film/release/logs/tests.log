@@ -1,0 +1,33 @@
+
+> changrenyan-video@0.1.0 test
+> node --test episodes/EP01/sample15/test/*.test.js episodes/EP01/full-film/test/*.test.js
+
+✔ person_01 has adult proportions, connected body volumes, and visible shoes (1.1359ms)
+✔ alternating stance feet remain grounded and locked in world space (17.6707ms)
+✔ macro-to-micro camera uses the reviewed right gluteus chain and returns to the same person (1.0441ms)
+✔ glucose crosses the two distinct biological boundaries in order and is not reversed on camera exit (1.3123ms)
+✔ long explanation holds retain visible ambient motion instead of becoming slides (2.915ms)
+✔ SRT time formatting handles the full-film minute boundary (0.9736ms)
+✔ subtitle export contains all eight reviewed narration segments and ends at 111 seconds (0.5609ms)
+✔ full film is an eight-scene continuous 111-second timeline below the release cap (1.192ms)
+✔ scene four has one foreground story and hands the same anatomical target to scene five (0.7508ms)
+✔ mandatory explanation windows stay independently readable (0.2234ms)
+✔ every scene owns a non-empty Chinese subtitle during its narration window (1.1368ms)
+✔ subtitle panel remains above the phone bottom safe zone (0.1878ms)
+✔ long scene titles and microscopic labels stay clear of phone UI and each other (0.1622ms)
+✔ scale breadcrumb keeps its final cell label inside the phone right safe edge (0.1214ms)
+✔ dense mechanism subtitles use a narrower phone-safe measure (0.1358ms)
+✔ gait alternates planted feet while keeping joint motion continuous (1.4393ms)
+✔ support foot stays on the ground without sliding during each stance (0.5517ms)
+✔ camera follows the supplied right-leg joint target before entering the tissue view (0.7838ms)
+✔ glucose crosses capillary wall, interstitial space, and muscle membrane in order (0.3206ms)
+✔ transition fades the walker before the microscopic diagram fills the page (0.315ms)
+✔ muscle contraction is visible at phone scale while preserving cell area directionally (0.1612ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 190.1849
