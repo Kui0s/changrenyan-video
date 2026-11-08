@@ -124,7 +124,7 @@ function wrapChinese(text, count = 18) {
 
 function drawSubtitle(scene) {
   const layout = FT.SUBTITLE_LAYOUT;
-  const lines = wrapChinese(scene.subtitle, layout.charactersPerLine);
+  const lines = wrapChinese(scene.subtitle, FT.subtitleCharactersPerLine(scene.id));
   ctx.save();
   ctx.globalAlpha = 0.92;
   ctx.fillStyle = 'rgba(248,244,232,0.94)';
@@ -134,7 +134,7 @@ function drawSubtitle(scene) {
   ctx.roundRect(layout.x, layout.y, layout.width, layout.height, 34);
   ctx.fill(); ctx.stroke();
   ctx.restore();
-  lines.forEach((line, index) => handLetter(line, 540, layout.lineTop + index * layout.lineGap, layout.fontSize, {
+  lines.forEach((line, index) => handLetter(line, 540, layout.lineTop + index * layout.lineGap, FT.subtitleFontSize(scene.id), {
     col: SK.ink, align: 'center', reveal: ease01(localTime(scene) / 0.7), key: 'subtitle-' + index, jit: 0.35, stroke: 0.75,
   }));
 }

@@ -35,6 +35,14 @@
     return 55;
   }
 
+  function subtitleFontSize(sceneId) {
+    return sceneId === '05' || sceneId === '06' ? 32 : SUBTITLE_LAYOUT.fontSize;
+  }
+
+  function subtitleCharactersPerLine(sceneId) {
+    return sceneId === '05' || sceneId === '06' ? 19 : SUBTITLE_LAYOUT.charactersPerLine;
+  }
+
   const SCENES = Object.freeze([
     {
       id: '01', start: 0, end: 10, key: 'question',
@@ -114,6 +122,8 @@
     SUBTITLE_LAYOUT,
     VISUAL_LAYOUT,
     titleFontSize,
+    subtitleFontSize,
+    subtitleCharactersPerLine,
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.EP01FullTimeline = api;

@@ -10,6 +10,8 @@ const {
   SUBTITLE_LAYOUT,
   VISUAL_LAYOUT,
   titleFontSize,
+  subtitleFontSize,
+  subtitleCharactersPerLine,
 } = require('../src/timeline.js');
 
 test('full film is an eight-scene continuous 111-second timeline below the release cap', () => {
@@ -68,4 +70,11 @@ test('long scene titles and microscopic labels stay clear of phone UI and each o
   assert.ok(titleFontSize(SCENES.at(-1).title) <= 46);
   assert.ok(VISUAL_LAYOUT.microCellLabelX <= 830);
   assert.ok(Math.abs(VISUAL_LAYOUT.microLabelsY - VISUAL_LAYOUT.exitNoteY) >= 120);
+});
+
+test('dense mechanism subtitles use a narrower phone-safe measure', () => {
+  assert.ok(subtitleFontSize('05') <= 32);
+  assert.ok(subtitleFontSize('06') <= 32);
+  assert.ok(subtitleCharactersPerLine('05') <= 19);
+  assert.ok(subtitleCharactersPerLine('06') <= 19);
 });
