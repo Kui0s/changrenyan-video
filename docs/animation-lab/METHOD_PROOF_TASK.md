@@ -66,3 +66,9 @@
 4. `INDEPENDENT_VISUAL_REVIEW_PROTOCOL_V1.md`：独立盲看、逐镜与源码双审，不改原90分制度。
 
 **顺序：** 研究上游完整流程与这些目标→证明A/B/C可产生真实效果→经独立视觉/工程审核+用户确认→才将能力归档为可复用生产模块。**这不是授权Codex重做EP01。**
+
+## 六、已找到的B/C具体候选代码（需要实际迁移验证）
+
+- **B｜连续倍率相机**：研究 `lemomo-ai/lemo-opuscar/styles/microscope/demo/film.js` 的 `camAt`（对数螺旋/相似变换）与 `activeLevel`/`plateAlpha`（同一玻片样本的已配准图像金字塔与逐倍率换层）。目标是借鉴**同一世界坐标内的连贯焦点和按尺度新增细节**；必须新建科学生理可信的活体人体/器官/组织层级，不能拿静态肝切片假装运动人体内实时发生的情况。
+- **C｜中文原生流程**：研究 `lemomo-ai/lemo-opuscar/core/tts/tts_zh.py` 句级普通话语音、`core/tts/asr_check.py --lang zh` 多语Whisper字符/数值检查，以及 `core/render/readcheck.mjs` 的中文阅读时间检查。实际测试普通话音轨、字幕断句、时间码与手机可读性；在线TTS使用之前核对微软相关服务与授权条款，也允许用户录音与合规离线方案。
+- 具体证据与局限见 `ADJACENT_IMPLEMENTATIONS_V1.md`。在新实验中这些**只是有源代码的候选实现，不是已经迁移成功的模块**。
