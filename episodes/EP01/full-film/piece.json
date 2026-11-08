@@ -1,0 +1,32 @@
+{
+  "name": "ep01-full-film-v2-3",
+  "title": "EP01 完整正片｜饭后走一走，身体里发生了什么？",
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 24,
+    "bpm": 120,
+    "duration": 111,
+    "frames": 2664
+  },
+  "storyFormat": "eight-scene whole-body-to-cell-to-whole-body narrative",
+  "style": "sketchbook",
+  "build": [
+    "src/head.html",
+    "kit/core.js",
+    "style",
+    "src/timeline.js",
+    "src/film-model.js",
+    "src/scenes.js",
+    "src/bridges.js",
+    "kit/morph.js",
+    "kit/board.js",
+    "kit/score-head.js",
+    "src/score.js",
+    "kit/score-tail.js"
+  ],
+  "review": {
+    "safe": { "top": 190, "bottom": 390, "right": 80 },
+    "refs": {}
+  }
+}
