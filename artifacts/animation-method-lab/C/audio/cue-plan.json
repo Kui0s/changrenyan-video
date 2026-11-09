@@ -1,0 +1,29 @@
+{
+  "voice": "Microsoft Huihui Desktop",
+  "culture": "zh-CN",
+  "purpose": "temporary local technical sync proof; not final programme narration",
+  "rights_note": "Generated locally from a Windows system voice; redistribution rights were not independently audited, so this track is test-only and must not be treated as final licensed narration.",
+  "cues": [
+    {
+      "start_s": 0.6,
+      "text": "葡萄糖先离开毛细血管。",
+      "end_s": 4.7,
+      "id": "c1",
+      "highlighted_event_t": 2.3
+    },
+    {
+      "start_s": 4.8,
+      "text": "它经过组织间隙。",
+      "end_s": 8.5,
+      "id": "c2",
+      "highlighted_event_t": 6.3
+    },
+    {
+      "start_s": 8.6,
+      "text": "再跨过肌细胞膜进入细胞。",
+      "end_s": 13.3,
+      "id": "c3",
+      "highlighted_event_t": 10.8
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+OK  c1                 at 0.60s   11 chars  need 3.79s  got 4.12s  "葡萄糖先离开毛细血管。"
+OK  c2                 at 4.80s    8 chars  need 3.12s  got 3.72s  "它经过组织间隙。"
+OK  c3                 at 8.64s   12 chars  need 4.01s  got 4.68s  "再跨过肌细胞膜进入细胞。"

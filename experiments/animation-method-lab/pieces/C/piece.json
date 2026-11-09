@@ -1,0 +1,8 @@
+{
+  "name": "method-proof-c-zh-voice",
+  "title": "C proof: Mandarin cue and Canvas subtitle sync",
+  "style": "sketchbook",
+  "format": { "width": 360, "height": 640, "fps": 24, "duration": 13.5, "frames": 324 },
+  "evidenceTimes": [0, 1.2, 2.3, 4.6, 5.2, 6.3, 8.4, 9, 10.8, 13.2, 13.4],
+  "build": ["src/head.html", "kit/core.js", "style", "src/piece.js", "src/tail.html"]
+}

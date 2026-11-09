@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Morph Proof</title><style>html,body{margin:0;background:#1d1a17;height:100%;overflow:hidden}body{display:grid;place-items:center}canvas{height:100vh;max-width:100vw}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas><script>
+"use strict";
+const FPS=24,W=1080,H=1920,DURATION=5,NFRAMES=120,LOOP_T=5;
+const BPM=120,BEAT=.5,E8=.25,E16=.125;
+const SAFE={top:220,bottom:300,right:100};
+const HAND='"Microsoft YaHei","DengXian","Segoe Print",sans-serif';
+const CX=540;
+const ERA_LIST=[[0,2.5,()=>sceneStarch()],[2.5,5,()=>sceneGlucose()]];
+const SHOTS=[['starch',0,0,2.5,'starch chain motif gathers'],['glucose',1,2.5,5,'outline becomes glucose symbol and expands']];
+const TIMELINE={width:W,height:H,fps:FPS,duration:DURATION,frames:NFRAMES,loop:LOOP_T,shots:SHOTS.map(([key,era,t0,t1,title],i)=>({id:i+1,key,era,t0,t1,title})),cuts:[],morphs:[2.5],cues:{},acts:[],board:[],narration:[]};
+window.TIMELINE=TIMELINE;

@@ -1,0 +1,8 @@
+{
+  "name": "method-proof-b-space-mechanism",
+  "title": "B proof: adult thigh continuity and two-barrier mechanism",
+  "style": "sketchbook",
+  "format": { "width": 1080, "height": 1920, "fps": 24, "duration": 20, "frames": 480 },
+  "evidenceTimes": [0, 2, 3.75, 4.5, 6, 7.25, 8.5, 9.5, 10.5, 12.2, 14, 16, 18, 19.5],
+  "build": ["src/head.html", "kit/core.js", "style", "src/piece.js", "src/tail.html"]
+}

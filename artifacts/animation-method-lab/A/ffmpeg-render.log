@@ -1,0 +1,39 @@
+COMMAND: C:\Users\COLORFUL\Documents\Codex\2026-11-06\https-github-com-kui0s-changrenyan-video-2\work\changrenyan-video\node_modules\ffmpeg-static\ffmpeg.exe -y -hide_banner -loglevel info -f image2pipe -framerate 24 -vcodec png -i pipe:0 -map 0:v:0 -c:v libx264 -preset slow -crf 16 -pix_fmt yuv420p -r 24 -frames:v 120 -movflags +faststart C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\artifacts\animation-method-lab\A\method-proof-a-morph.mp4
+Input #0, image2pipe, from 'pipe:0':
+  Duration: N/A, bitrate: N/A
+  Stream #0:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x1920, 24 fps, 24 tbr, 24 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (png (native) -> h264 (libx264))
+[libx264 @ 000002bb90fbfa80] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 000002bb90fbfa80] profile High, level 5.0, 4:2:0, 8-bit
+[libx264 @ 000002bb90fbfa80] 264 - core 164 r3172 c1c9931 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=24 lookahead_threads=4 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=16.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to 'C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\artifacts\animation-method-lab\A\method-proof-a-morph.mp4':
+  Metadata:
+    encoder         : Lavf60.16.100
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 1080x1920, q=2-31, 24 fps, 12288 tbn
+    Metadata:
+      encoder         : Lavc60.31.102 libx264
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    3 fps=0.2 q=21.0 size=     256kB time=00:00:00.00 bitrate=N/A speed=   0x    frame=    5 fps=0.3 q=21.0 size=     256kB time=00:00:00.12 bitrate=16780.3kbits/s speed=0.00763x    frame=    8 fps=0.5 q=21.0 size=     256kB time=00:00:00.25 bitrate=8390.1kbits/s speed=0.0148x    frame=   11 fps=0.6 q=21.0 size=     256kB time=00:00:00.37 bitrate=5593.4kbits/s speed=0.0215x    frame=   14 fps=0.8 q=21.0 size=     512kB time=00:00:00.50 bitrate=8389.4kbits/s speed=0.0279x    frame=   17 fps=0.9 q=21.0 size=     512kB time=00:00:00.62 bitrate=6711.5kbits/s speed=0.0338x    frame=   20 fps=1.1 q=21.0 size=     512kB time=00:00:00.75 bitrate=5592.9kbits/s speed=0.0395x    frame=   23 fps=1.2 q=21.0 size=     512kB time=00:00:00.87 bitrate=4793.9kbits/s speed=0.0448x    frame=   27 fps=1.3 q=21.0 size=     768kB time=00:00:01.00 bitrate=6291.8kbits/s speed=0.0499x    [mp4 @ 000002bb90a0e940] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 000002bb90a12980] video:3415kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.066941%
+frame=  120 fps=5.4 q=-1.0 Lsize=    3417kB time=00:00:04.87 bitrate=5742.7kbits/s speed=0.218x    
+[libx264 @ 000002bb90fbfa80] frame I:1     Avg QP:10.23  size:244790
+[libx264 @ 000002bb90fbfa80] frame P:32    Avg QP:13.36  size: 67816
+[libx264 @ 000002bb90fbfa80] frame B:87    Avg QP:15.12  size: 12431
+[libx264 @ 000002bb90fbfa80] consecutive B-frames:  0.8%  6.7%  2.5% 90.0%
+[libx264 @ 000002bb90fbfa80] mb I  I16..4: 16.1% 33.3% 50.6%
+[libx264 @ 000002bb90fbfa80] mb P  I16..4:  1.8%  4.5%  4.5%  P16..4: 42.9% 14.3% 10.2%  0.0%  0.0%    skip:21.7%
+[libx264 @ 000002bb90fbfa80] mb B  I16..4:  0.1%  0.1%  0.1%  B16..8: 26.7%  4.4%  1.7%  direct: 1.8%  skip:65.1%  L0:58.3% L1:39.8% BI: 1.9%
+[libx264 @ 000002bb90fbfa80] 8x8 transform intra:39.5% inter:8.7%
+[libx264 @ 000002bb90fbfa80] direct mvs  spatial:85.1% temporal:14.9%
+[libx264 @ 000002bb90fbfa80] coded y,uvDC,uvAC intra: 72.6% 25.3% 19.5% inter: 9.8% 2.3% 0.9%
+[libx264 @ 000002bb90fbfa80] i16 v,h,dc,p: 33% 27% 25% 14%
+[libx264 @ 000002bb90fbfa80] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu:  8% 14% 36%  7%  7%  5%  7%  6% 10%
+[libx264 @ 000002bb90fbfa80] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 11% 15% 27%  8%  9%  5%  8%  6% 11%
+[libx264 @ 000002bb90fbfa80] i8c dc,h,v,p: 73% 20%  5%  2%
+[libx264 @ 000002bb90fbfa80] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 000002bb90fbfa80] ref P L0: 54.4%  1.3% 26.0% 12.1%  6.2%
+[libx264 @ 000002bb90fbfa80] ref B L0: 70.0% 17.6%  9.0%  3.4%
+[libx264 @ 000002bb90fbfa80] ref B L1: 99.3%  0.7%
+[libx264 @ 000002bb90fbfa80] kb/s:5594.28

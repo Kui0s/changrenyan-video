@@ -1,0 +1,51 @@
+COMMAND: C:\Users\COLORFUL\Documents\Codex\2026-11-06\https-github-com-kui0s-changrenyan-video-2\work\changrenyan-video\node_modules\ffmpeg-static\ffmpeg.exe -y -hide_banner -loglevel info -f image2pipe -framerate 24 -vcodec png -i pipe:0 -i C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\audio\temporary-zh-voice.wav -map 0:v:0 -map 1:a:0 -c:a aac -b:a 160k -shortest -c:v libx264 -preset slow -crf 16 -pix_fmt yuv420p -r 24 -frames:v 324 -movflags +faststart C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\method-proof-c-zh-voice.mp4
+Input #0, image2pipe, from 'pipe:0':
+  Duration: N/A, bitrate: N/A
+  Stream #0:0: Video: png, rgba(pc, gbr/unknown/unknown), 360x640, 24 fps, 24 tbr, 24 tbn
+[aist#1:0/pcm_s16le @ 0000024d080bdd40] Guessed Channel Layout: stereo
+Input #1, wav, from 'C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\audio\temporary-zh-voice.wav':
+  Metadata:
+    encoder         : Lavf60.16.100
+  Duration: 00:00:13.50, bitrate: 1536 kb/s
+  Stream #1:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 48000 Hz, 2 channels, s16, 1536 kb/s
+Stream mapping:
+  Stream #0:0 -> #0:0 (png (native) -> h264 (libx264))
+  Stream #1:0 -> #0:1 (pcm_s16le (native) -> aac (native))
+[in#0/image2pipe @ 0000024d080c3200] Thread message queue blocking; consider raising the thread_queue_size option (current value: 8)
+[libx264 @ 0000024d08130480] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0000024d08130480] profile High, level 3.0, 4:2:0, 8-bit
+[libx264 @ 0000024d08130480] 264 - core 164 r3172 c1c9931 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=20 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=16.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to 'C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\method-proof-c-zh-voice.mp4':
+  Metadata:
+    encoder         : Lavf60.16.100
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 360x640, q=2-31, 24 fps, 12288 tbn
+    Metadata:
+      encoder         : Lavc60.31.102 libx264
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 160 kb/s
+    Metadata:
+      encoder         : Lavc60.31.102 aac
+frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0kB time=00:00:00.91 bitrate=   0.4kbits/s speed=1.53x    frame=    0 fps=0.0 q=0.0 size=       0kB time=00:00:01.92 bitrate=   0.2kbits/s speed=1.75x    frame=    0 fps=0.0 q=0.0 size=       0kB time=00:00:02.83 bitrate=   0.1kbits/s speed=1.76x    frame=   15 fps=7.1 q=21.0 size=       0kB time=00:00:03.71 bitrate=   0.1kbits/s speed=1.75x    frame=   30 fps= 11 q=21.0 size=     256kB time=00:00:04.35 bitrate= 482.0kbits/s speed=1.66x    frame=   45 fps= 14 q=21.0 size=     256kB time=00:00:04.97 bitrate= 422.0kbits/s speed=1.59x    frame=   59 fps= 16 q=21.0 size=     512kB time=00:00:05.54 bitrate= 756.3kbits/s speed=1.53x    frame=   74 fps= 18 q=21.0 size=     768kB time=00:00:06.16 bitrate=1020.5kbits/s speed=1.49x    frame=   88 fps= 19 q=21.0 size=     768kB time=00:00:06.76 bitrate= 930.4kbits/s speed=1.46x    frame=  102 fps= 20 q=21.0 size=    1024kB time=00:00:07.33 bitrate=1143.1kbits/s speed=1.43x    frame=  117 fps= 21 q=21.0 size=    1024kB time=00:00:07.93 bitrate=1057.1kbits/s speed=1.41x    frame=  130 fps= 21 q=21.0 size=    1280kB time=00:00:08.51 bitrate=1231.9kbits/s speed=1.39x    frame=  144 fps= 22 q=21.0 size=    1280kB time=00:00:09.08 bitrate=1153.8kbits/s speed=1.37x    frame=  158 fps= 22 q=21.0 size=    1536kB time=00:00:09.68 bitrate=1299.2kbits/s speed=1.36x    frame=  172 fps= 22 q=21.0 size=    1536kB time=00:00:10.26 bitrate=1226.3kbits/s speed=1.34x    frame=  186 fps= 23 q=21.0 size=    1792kB time=00:00:10.83 bitrate=1354.6kbits/s speed=1.33x    frame=  200 fps= 23 q=21.0 size=    1792kB time=00:00:11.43 bitrate=1283.9kbits/s speed=1.32x    frame=  214 fps= 23 q=21.0 size=    2048kB time=00:00:12.01 bitrate=1396.9kbits/s speed=1.31x    frame=  229 fps= 24 q=21.0 size=    2048kB time=00:00:12.62 bitrate=1328.5kbits/s speed= 1.3x    [mp4 @ 0000024d08138000] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0000024d080d64c0] video:3135kB audio:92kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.327448%
+frame=  324 fps= 31 q=-1.0 Lsize=    3238kB time=00:00:13.48 bitrate=1967.2kbits/s speed=1.31x    
+[libx264 @ 0000024d08130480] frame I:2     Avg QP:15.35  size: 47008
+[libx264 @ 0000024d08130480] frame P:82    Avg QP:17.13  size: 21429
+[libx264 @ 0000024d08130480] frame B:240   Avg QP:18.62  size:  5661
+[libx264 @ 0000024d08130480] consecutive B-frames:  1.2%  0.0%  0.0% 98.8%
+[libx264 @ 0000024d08130480] mb I  I16..4:  3.3% 19.6% 77.1%
+[libx264 @ 0000024d08130480] mb P  I16..4:  0.1%  0.8%  3.5%  P16..4: 24.7% 34.5% 33.7%  0.0%  0.0%    skip: 2.6%
+[libx264 @ 0000024d08130480] mb B  I16..4:  0.0%  0.1%  0.7%  B16..8: 10.1% 12.5%  9.2%  direct: 3.2%  skip:64.1%  L0:72.0% L1:21.9% BI: 6.1%
+[libx264 @ 0000024d08130480] 8x8 transform intra:17.2% inter:6.0%
+[libx264 @ 0000024d08130480] direct mvs  spatial:95.4% temporal:4.6%
+[libx264 @ 0000024d08130480] coded y,uvDC,uvAC intra: 84.8% 57.0% 50.2% inter: 29.9% 5.1% 3.3%
+[libx264 @ 0000024d08130480] i16 v,h,dc,p: 36% 18% 37%  8%
+[libx264 @ 0000024d08130480] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 33% 11% 19%  6%  7%  5%  6%  6%  8%
+[libx264 @ 0000024d08130480] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 41%  8% 15%  6%  7%  6%  5%  5%  7%
+[libx264 @ 0000024d08130480] i8c dc,h,v,p: 16% 31% 52%  1%
+[libx264 @ 0000024d08130480] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0000024d08130480] ref P L0: 29.4%  5.5% 25.9% 20.8% 18.4%
+[libx264 @ 0000024d08130480] ref B L0: 40.6% 22.9% 21.4% 15.1%
+[libx264 @ 0000024d08130480] ref B L1: 99.9%  0.1%
+[libx264 @ 0000024d08130480] kb/s:1902.07
+[aac @ 0000024d08773a40] Qavg: 45092.105

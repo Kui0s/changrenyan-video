@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B Space and Mechanism Proof</title><style>html,body{margin:0;height:100%;overflow:hidden;background:#1d1a17}body{display:grid;place-items:center}canvas{height:100vh;max-width:100vw}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas><script>
+"use strict";
+const FPS=24,W=1080,H=1920,DURATION=20,NFRAMES=480,LOOP_T=20;
+const BPM=120,BEAT=.5,E8=.25,E16=.125;
+const SAFE={top:190,bottom:260,right:100};
+const HAND='"Microsoft YaHei","DengXian","Segoe Print",sans-serif';
+const CX=540;
+const TIMELINE={width:W,height:H,fps:FPS,duration:DURATION,frames:NFRAMES,loop:LOOP_T,shots:[
+  {id:1,key:'b-space',t0:0,t1:9,title:'same adult to left thigh muscle cutaway and back'},
+  {id:2,key:'b-mechanism',t0:9,t1:20,title:'capillary wall to interstitial space to muscle membrane'}
+],cuts:[9],morphs:[],cues:{},acts:[],board:[],narration:[]};
+window.TIMELINE=TIMELINE;

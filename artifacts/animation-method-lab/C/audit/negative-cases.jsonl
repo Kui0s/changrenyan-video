@@ -1,0 +1,5 @@
+{"mode":"good","status":"PASS","code":"OK","exit":0,"frame":29,"evidence_frame":29}
+{"mode":"overlap","status":"FAIL","code":"OVERLAP","exit":1,"frame":24,"evidence_frame":24}
+{"mode":"short","status":"FAIL","code":"BAD_DWELL","exit":1,"frame":29,"id":"short","dwell":0.25,"needed":1,"evidence_frame":29}
+{"mode":"outside","status":"FAIL","code":"OUTSIDE_VIEWPORT","exit":1,"frame":24,"evidence_frame":24}
+{"mode":"missing-interface","status":"NOT_CHECKED","code":"MISSING_TEXTS_OR_DUR","exit":2,"frame":null,"evidence_frame":0}

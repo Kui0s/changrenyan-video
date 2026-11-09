@@ -1,0 +1,16 @@
+{
+  "name": "method-proof-a-morph",
+  "title": "A morph proof: starch motif to glucose symbol",
+  "style": "sketchbook",
+  "format": { "width": 1080, "height": 1920, "fps": 24, "duration": 5, "frames": 120 },
+  "evidenceTimes": [1.75, 1.79, 2.25, 2.5, 2.75, 3.2],
+  "build": [
+    "src/head.html",
+    "kit/core.js",
+    "style",
+    "src/scenes.js",
+    "src/bridges.js",
+    "kit/morph.js",
+    "src/tail.html"
+  ]
+}

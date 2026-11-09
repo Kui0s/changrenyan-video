@@ -1,0 +1,27 @@
+COMMAND: C:\Users\COLORFUL\Documents\Codex\2026-11-06\https-github-com-kui0s-changrenyan-video-2\work\changrenyan-video\node_modules\ffmpeg-static\ffmpeg.exe -y -hide_banner -i C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\audio\c1.wav -i C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\audio\c2.wav -i C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\audio\c3.wav -filter_complex [0:a]adelay=600|600[a0];[1:a]adelay=4800|4800[a1];[2:a]adelay=8600|8600[a2];[a0][a1][a2]amix=inputs=3:duration=longest:normalize=0,apad=pad_dur=13.5,atrim=duration=13.5[a] -map [a] -ar 48000 -ac 2 C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\audio\temporary-zh-voice.wav
+[aist#0:0/pcm_s16le @ 000001cb5e91b480] Guessed Channel Layout: mono
+Input #0, wav, from 'C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\audio\c1.wav':
+  Duration: 00:00:02.08, bitrate: 352 kb/s
+  Stream #0:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 22050 Hz, 1 channels, s16, 352 kb/s
+[aist#1:0/pcm_s16le @ 000001cb5e931c40] Guessed Channel Layout: mono
+Input #1, wav, from 'C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\audio\c2.wav':
+  Duration: 00:00:01.53, bitrate: 353 kb/s
+  Stream #1:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 22050 Hz, 1 channels, s16, 352 kb/s
+[aist#2:0/pcm_s16le @ 000001cb5e93e7c0] Guessed Channel Layout: mono
+Input #2, wav, from 'C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\audio\c3.wav':
+  Duration: 00:00:02.17, bitrate: 352 kb/s
+  Stream #2:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 22050 Hz, 1 channels, s16, 352 kb/s
+Stream mapping:
+  Stream #0:0 (pcm_s16le) -> adelay:default
+  Stream #1:0 (pcm_s16le) -> adelay:default
+  Stream #2:0 (pcm_s16le) -> adelay:default
+  atrim:default -> Stream #0:0 (pcm_s16le)
+Press [q] to stop, [?] for help
+Output #0, wav, to 'C:\Users\COLORFUL\Documents\Codex\2026-11-08\kui0s-changrenyan-video-issue-13-pr\work\changrenyan-video-research-animate-methods-transfer-v1\experiments\animation-method-lab\artifacts\animation-method-lab\C\audio\temporary-zh-voice.wav':
+  Metadata:
+    ISFT            : Lavf60.16.100
+  Stream #0:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 48000 Hz, stereo, s16, 1536 kb/s
+    Metadata:
+      encoder         : Lavc60.31.102 pcm_s16le
+size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    [out#0/wav @ 000001cb5e948ac0] video:0kB audio:2531kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.003009%
+size=    2531kB time=00:00:13.49 bitrate=1536.1kbits/s speed=1.4e+03x    
