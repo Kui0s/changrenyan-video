@@ -1,0 +1,11 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C Mandarin Sync Proof</title><style>html,body{margin:0;height:100%;overflow:hidden;background:#1d1a17}body{display:grid;place-items:center}canvas{height:100vh;max-width:100vw}</style></head>
+<body><canvas id="c" width="360" height="640"></canvas><script>
+"use strict";
+const FPS=24,W=360,H=640,DURATION=13.5,NFRAMES=324,LOOP_T=13.5;
+const BPM=120,BEAT=.5,E8=.25,E16=.125;
+const SAFE={top:42,bottom:118,right:18};
+const HAND='"Microsoft YaHei","DengXian","Microsoft JhengHei",sans-serif';
+const CX=180;
+const TIMELINE={width:W,height:H,fps:FPS,duration:DURATION,frames:NFRAMES,loop:LOOP_T,shots:[{id:1,key:'zh-sync',t0:0,t1:13.5,title:'three Mandarin cues with matching Canvas subtitles'}],cuts:[],morphs:[],cues:{},acts:[],board:[],narration:[]};
+window.TIMELINE=TIMELINE;

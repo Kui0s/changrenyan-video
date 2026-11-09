@@ -1,0 +1,18 @@
+{
+  "name": "changrenyan-animation-method-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "build": "node vendor/animate/tools/build.mjs pieces/A && node vendor/animate/tools/build.mjs pieces/B && node vendor/animate/tools/build.mjs pieces/C",
+    "render": "node scripts/render-piece.mjs pieces/A ../../artifacts/animation-method-lab/A && node scripts/render-piece.mjs pieces/B ../../artifacts/animation-method-lab/B && node scripts/render-piece.mjs pieces/C ../../artifacts/animation-method-lab/C ../../artifacts/animation-method-lab/C/audio/temporary-zh-voice.wav",
+    "evidence": "node scripts/audit-c.mjs",
+    "verify": "npm test && npm run build"
+  },
+  "devDependencies": {
+    "ffmpeg-static": "5.3.0",
+    "ffprobe-static": "3.1.0",
+    "playwright": "1.65.0"
+  }
+}
